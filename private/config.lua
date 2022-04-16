@@ -12,9 +12,9 @@
 
 --指定要启用的模块
 hspoon_list = {
-    "AClock",
+    -- "AClock",
     "ClipShow",
-    "CountDown",
+    --"CountDown",
     "KSheet",
     "WinWin",
     "VolumeScroll",

@@ -208,7 +208,7 @@ end
 ----------------------------------------------------------------------------------------------------
 -- 在浏览器中打开 Hammerspoon API 手册
 ----------------------------------------------------------------------------------------------------
-hsman_keys = hsman_keys or {"alt", "H"}
+hsman_keys = hsman_keys or {"alt", "cmd", "H"}
 if string.len(hsman_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsman_keys[1], hsman_keys[2], "查看 Hammerspoon 手册", function()
         hs.doc.hsdocs.forceExternalBrowser(true)
@@ -259,7 +259,7 @@ end
 ----------------------------------------------------------------------------------------------------
 -- 锁屏
 ----------------------------------------------------------------------------------------------------
-hslock_keys = hslock_keys or {"alt", "L"}
+hslock_keys = hslock_keys or {"alt","cmd", "L"}
 if string.len(hslock_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hslock_keys[1], hslock_keys[2], "锁屏", function()
         hs.caffeinate.lockScreen()
@@ -419,6 +419,65 @@ if string.len(hsconsole_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsconsole_keys[1], hsconsole_keys[2], "打开 Hammerspoon 控制台", function() hs.toggleConsole() end)
 end
 
+----------------------------------------------------------------------------------------------------
+-- 方向控制 
+----------------------------------------------------------------------------------------------------
+-- https://stackoverflow.com/questions/40986242/key-repeats-are-delayed-in-my-hammerspoon-script
+
+local fastKeyStroke = function(modifiers, character)
+  local event = require("hs.eventtap").event
+  event.newKeyEvent(modifiers, string.lower(character), true):post()
+  event.newKeyEvent(modifiers, string.lower(character), false):post()
+end
+
+local altHyper = {"alt"}
+hs.fnutils.each({
+  -- Movement
+  { key='h', mod={}, direction='left'},
+  { key=',', mod={}, direction='down'},
+  { key='i', mod={}, direction='up'},
+  { key='l', mod={}, direction='right'},
+  { key='0', mod={'cmd'}, direction='left'},  -- beginning of line
+  { key='4', mod={'cmd'}, direction='right'}, -- end of line
+  { key='b', mod={'alt'}, direction='left'},  -- back word
+  { key='w', mod={'alt'}, direction='right'}, -- forward word
+}, function(hotkey)
+  hs.hotkey.bind(altHyper, hotkey.key, 
+      function() fastKeyStroke(hotkey.mod, hotkey.direction) end,
+      nil,
+      function() fastKeyStroke(hotkey.mod, hotkey.direction) end
+    )
+  end
+)
+
+local altShiftHyper = {"alt","shift"}
+hs.fnutils.each({
+  -- Movement
+  { key='h', mod={"shift"}, direction='left'},
+  { key=',', mod={"shift"}, direction='down'},
+  { key='i', mod={"shift"}, direction='up'},
+  { key='l', mod={"shift"}, direction='right'},
+  { key='0', mod={"shift","cmd"}, direction='left'},  -- beginning of line
+  { key='4', mod={"shift","cmd"}, direction='right'}, -- end of line
+  { key='b', mod={"shift","alt"}, direction='left'},  -- back word
+  { key='w', mod={"shift","alt"}, direction='right'}, -- forward word
+}, function(hotkey)
+  hs.hotkey.bind(altShiftHyper, hotkey.key, 
+      function() fastKeyStroke(hotkey.mod, hotkey.direction) end,
+      nil,
+      function() fastKeyStroke(hotkey.mod, hotkey.direction) end
+    )
+  end
+)
+
+-- shift-alt-left
+hs.hotkey.bind({"shift", "alt", "ctrl"}, "h", function()
+  hs.eventtap.event.newKeyEvent({"shift", "alt"}, "left", true):post()
+end)
+-- shift-alt-right
+hs.hotkey.bind({"shift", "alt", "ctrl"}, "l", function()
+  hs.eventtap.event.newKeyEvent({"shift", "alt"}, "right", true):post()
+end)
 ----------------------------------------------------------------------------------------------------
 -- 初始化 modalMgr
 ----------------------------------------------------------------------------------------------------
