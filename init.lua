@@ -471,13 +471,17 @@ hs.fnutils.each({
 )
 
 -- shift-alt-left
-hs.hotkey.bind({"shift", "alt", "ctrl"}, "h", function()
-  hs.eventtap.event.newKeyEvent({"shift", "alt"}, "left", true):post()
-end)
+hs.hotkey.bind({"shift", "alt", "ctrl"}, "h", 
+    function() fastKeyStroke({"shift", "alt"}, "left")end,
+    nil,
+    function() fastKeyStroke({"shift", "alt"}, "left")end
+)
 -- shift-alt-right
-hs.hotkey.bind({"shift", "alt", "ctrl"}, "l", function()
-  hs.eventtap.event.newKeyEvent({"shift", "alt"}, "right", true):post()
-end)
+hs.hotkey.bind({"shift", "alt", "ctrl"}, "l", 
+    function() fastKeyStroke({"shift", "alt"}, "right")end,
+    nil,
+    function() fastKeyStroke({"shift", "alt"}, "right")end
+)
 -- del
 hs.hotkey.bind({"alt"}, "'", 
       function() fastKeyStroke({}, "forwarddelete") end,
