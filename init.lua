@@ -478,6 +478,12 @@ end)
 hs.hotkey.bind({"shift", "alt", "ctrl"}, "l", function()
   hs.eventtap.event.newKeyEvent({"shift", "alt"}, "right", true):post()
 end)
+-- del
+hs.hotkey.bind({"alt"}, "'", 
+      function() fastKeyStroke({}, "forwarddelete") end,
+      nil,
+      function() fastKeyStroke({}, "forwarddelete") end
+)
 ----------------------------------------------------------------------------------------------------
 -- 初始化 modalMgr
 ----------------------------------------------------------------------------------------------------
