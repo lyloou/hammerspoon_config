@@ -440,7 +440,7 @@ hs.fnutils.each({
   { key='0', mod={'cmd'}, direction='left'},  -- beginning of line
   { key='4', mod={'cmd'}, direction='right'}, -- end of line
   { key='b', mod={'alt'}, direction='left'},  -- back word
-  { key='w', mod={'alt'}, direction='right'}, -- forward word
+  { key='f', mod={'alt'}, direction='right'}, -- forward word
 }, function(hotkey)
   hs.hotkey.bind(altHyper, hotkey.key, 
       function() fastKeyStroke(hotkey.mod, hotkey.direction) end,
@@ -460,7 +460,7 @@ hs.fnutils.each({
   { key='0', mod={"shift","cmd"}, direction='left'},  -- beginning of line
   { key='4', mod={"shift","cmd"}, direction='right'}, -- end of line
   { key='b', mod={"shift","alt"}, direction='left'},  -- back word
-  { key='w', mod={"shift","alt"}, direction='right'}, -- forward word
+  { key='f', mod={"shift","alt"}, direction='right'}, -- forward word
 }, function(hotkey)
   hs.hotkey.bind(altShiftHyper, hotkey.key, 
       function() fastKeyStroke(hotkey.mod, hotkey.direction) end,
