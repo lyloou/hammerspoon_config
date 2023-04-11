@@ -13,16 +13,16 @@
 --指定要启用的模块
 hspoon_list = {
     -- "AClock",
-    "ClipShow",
-    --"CountDown",
+    -- "ClipShow",
+    -- "CountDown",
     "KSheet",
     "WinWin",
     "VolumeScroll",
     "PopupTranslateSelection",
-    -- "DeepLTranslate"
-    -- "HSaria2"
-    -- "HSearch"
-    --"SpeedMenu",
+    -- "DeepLTranslate",
+    -- "HSaria2",
+    -- "HSearch",
+    -- "SpeedMenu",
     -- "MountedVolumes",
     -- "HeadphoneAutoPause",
 }
@@ -34,21 +34,22 @@ hspoon_list = {
 
 hsapp_list = {
     {key = 'a', name = 'Alacritty'},
-    {key = 'c', id = 'com.google.Chrome'},
+    {key = 'b', name = 'Microsoft Edge'},
+    {key = 'c', name = 'Visual Studio Code'},
+    {key = 'd', name = 'DataGrip'},
     {key = 'e', name = 'WizNote'},
     {key = 'f', name = 'Finder'},
-    {key = 'i', name = 'kitty'},
+    {key = 'i', name = 'IntelliJ IDEA'},
     {key = 'j', name = 'Typora'},
     {key = 'o', name = 'Obsidian'},
     {key = 'k', name = 'Keynote'},
     {key = 's', name = 'Visual Studio Code'},
     {key = 'p', name = 'Podcasts'},
-    {key = 't', name = 'iTerm'},
+    {key = 't', name = 'WindTerm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
-    {key = 'b', name = 'Microsoft Edge'},
-    {key = 'm', name = 'Mweb'},
-    {key = 'w', name = 'WeChat'},
-    {key = 'x', name = 'Thunder'},
+    {key = 'm', id = 'com.netease.163music'},
+    {key = 'w', id = 'com.kingsoft.wpsoffice.mac'},
+    {key = 'x', name = 'IntelliJ IDEA'},
     {key = 'y', id = 'com.apple.systempreferences'},
 }
 
@@ -63,14 +64,14 @@ hswhints_keys = {"alt", "tab"}
 hsappM_keys = {"alt", "A"}
 
 -- 系统剪切板快捷键绑定
-hsclipsM_keys = {"alt", "C"}
+-- hsclipsM_keys = {"alt", "C"}
 
 
 -- 在默认浏览器中打开 Hammerspoon 和 Spoons API 手册
 --hsman_keys = {"alt", "H"}
 
 -- 倒计时快捷键绑定
-hscountdM_keys = {"alt", "I"}
+-- hscountdM_keys = {"alt", "I"}
 
 -- 锁定电脑快捷键绑定
 --hslock_keys = {"alt", "L"}
@@ -82,19 +83,19 @@ hsresizeM_keys = {"alt", "R"}
 hscheats_keys = {"alt", "S"}
 
 -- 显示时钟快捷键绑定
-hsaclock_keys = {"alt", "w"}
+-- hsaclock_keys = {"alt", "w"}
 
 -- 粘贴 chrome 或 safari 打开最前置的网址
-hstype_keys = {"alt", "V"}
+-- hstype_keys = {"alt", "V"}
 
 -- 显示 Hammerspoon 控制台
-hsconsole_keys = {"alt", "Z"}
+-- hsconsole_keys = {"alt", "Z"}
 
 -- 显示 MountedVolumes
-hstype_keys = {"alt", "M"}
+-- hstype_keys = {"alt", "M"}
 
 -- 显示搜索
-hsearch_keys = {"alt", "G"}
+-- hsearch_keys = {"alt", "Gq"}
 
 ----------------------------------------------------------------------------------------------------
 --------------------------------- hammerspoon 快捷键绑定配置  -----------------------------------------

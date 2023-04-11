@@ -82,14 +82,27 @@ end
 ----------------------------------------------------------------------------------------------------
 -- 定义 windowHints 快捷键
 ----------------------------------------------------------------------------------------------------
-hswhints_keys = hswhints_keys or {"alt", "tab"}
-if string.len(hswhints_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
-        spoon.ModalMgr:deactivateAll()
-        hs.hints.windowHints()
-    end)
-end
+-- hswhints_keys = hswhints_keys or {"alt", "tab"}
+-- if string.len(hswhints_keys[2]) > 0 then
+--     spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
+--         spoon.ModalMgr:deactivateAll()
+--         hs.hints.windowHints()
+--     end)
+-- end
+-- set up your windowfilter
+-- set up your windowfilter
+switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
+switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
+switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome'} -- specialized switcher for your dozens of browser windows :)
 
+-- bind to hotkeys; WARNING: at least one modifier key is required!
+hs.hotkey.bind('alt','tab','Next window',function()switcher:next()end)
+hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher:previous()end)
+
+-- alternatively, call .nextWindow() or .previousWindow() directly (same as hs.window.switcher.new():next())
+hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
+-- you can also bind to `repeatFn` for faster traversing
+hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
 
 ----------------------------------------------------------------------------------------------------
 --------------------------------------- appM 快速打开应用 ---------------------------------------------
@@ -441,6 +454,9 @@ hs.fnutils.each({
   { key='4', mod={'cmd'}, direction='right'}, -- end of line
   { key='b', mod={'alt'}, direction='left'},  -- back word
   { key='f', mod={'alt'}, direction='right'}, -- forward word
+  { key='u', mod={}, direction='pageup'},
+  { key='e', mod={}, direction='pageup'},
+  { key='d', mod={}, direction='pagedown'},
 }, function(hotkey)
   hs.hotkey.bind(altHyper, hotkey.key, 
       function() fastKeyStroke(hotkey.mod, hotkey.direction) end,
@@ -499,3 +515,8 @@ spoon.ModalMgr.supervisor:enter()
 ----------------------------------------------------------------------------------------------------
 -------------------------------------------- End ---------------------------------------------------
 ----------------------------------------------------------------------------------------------------
+-- 将 shift+option+z 绑定到插入当前时间的函数
+hs.hotkey.bind({"shift", "option"}, "z", function()
+    -- 获取当前时间并将其插入到当前应用程序的光标位置
+    hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S"))
+  end)
