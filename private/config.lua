@@ -33,24 +33,27 @@ hspoon_list = {
 -- 绑定 启动 app 快捷键
 
 hsapp_list = {
+    {key = '1', name = 'Visual Studio Code'},
+    {key = '2', name = 'Microsoft Edge'},
+    {key = '3', name = 'IntelliJ IDEA'},
+    {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
+
     {key = 'a', name = 'Alacritty'},
-    {key = 'b', name = 'Microsoft Edge'},
-    {key = 'c', name = 'Visual Studio Code'},
     {key = 'd', name = 'DataGrip'},
     {key = 'e', name = 'WizNote'},
     {key = 'f', name = 'Finder'},
     {key = 'i', name = 'IntelliJ IDEA'},
     {key = 'j', name = 'Typora'},
-    {key = 'o', name = 'Obsidian'},
     {key = 'k', name = 'Keynote'},
-    {key = 's', name = 'Visual Studio Code'},
+    {key = 's', name = 'Obsidian'},
     {key = 'p', name = 'Podcasts'},
     {key = 't', name = 'WindTerm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
     {key = 'm', id = 'com.netease.163music'},
-    {key = 'w', id = 'com.kingsoft.wpsoffice.mac'},
-    {key = 'x', name = 'IntelliJ IDEA'},
+    {key = 'n', id = 'com.navicat.NavicatPremium'},
+    {key = 'w', name = '微信读书'},
     {key = 'y', id = 'com.apple.systempreferences'},
+    {key = 'z', id = 'com.goodsnooze.MenuGPT'},
 }
 
 
