@@ -112,7 +112,8 @@ spoon.ModalMgr:new("appM")
 local cmodal = spoon.ModalMgr.modal_list["appM"]
 cmodal:bind('', 'escape', '退出 ', function() spoon.ModalMgr:deactivate({"appM"}) end)
 cmodal:bind('', 'Q', '退出 ', function() spoon.ModalMgr:deactivate({"appM"}) end)
---cmodal:bind('', 'tab', 'Toggle Cheatsheet', function() spoon.ModalMgr:toggleCheatsheet() end)
+cmodal:bind('', 'L', '锁屏 ', function() hs.caffeinate.lockScreen() end)
+-- cmodal:bind('', 'tab', 'Toggle Cheatsheet', function() spoon.ModalMgr:toggleCheatsheet() end)
 if not hsapp_list then
     hsapp_list = {
         {key = 'f', name = 'Finder'},
@@ -516,7 +517,5 @@ spoon.ModalMgr.supervisor:enter()
 -------------------------------------------- End ---------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 -- 将 shift+option+z 绑定到插入当前时间的函数
-hs.hotkey.bind({"shift", "option"}, "z", function()
-    -- 获取当前时间并将其插入到当前应用程序的光标位置
-    hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S"))
-  end)
+-- 获取当前时间并将其插入到当前应用程序的光标位置
+hs.hotkey.bind({"shift", "option"}, "z", function() hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S")) end)
