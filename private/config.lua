@@ -38,22 +38,23 @@ hsapp_list = {
     {key = '3', name = 'IntelliJ IDEA'},
     {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
 
-    {key = 'a', name = 'Alacritty'},
-    {key = 'd', name = 'DataGrip'},
-    {key = 'e', name = 'WizNote'},
+    {key = 'z', name = 'Alacritty'},
+    {key = 'b', name = 'Notes'},
+    {key = 'e', name = 'Memos'},
     {key = 'f', name = 'Finder'},
+    {key = 'g', name = 'DataGrip'},
     {key = 'i', name = 'IntelliJ IDEA'},
     {key = 'j', name = 'Typora'},
     {key = 'k', name = 'Keynote'},
     {key = 's', name = 'Obsidian'},
+    {key = 'o', name = 'Apifox'},
     {key = 'p', name = 'Podcasts'},
     {key = 't', name = 'WindTerm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
     {key = 'm', id = 'com.netease.163music'},
     {key = 'n', id = 'com.navicat.NavicatPremium'},
-    {key = 'w', name = '微信读书'},
-    {key = 'y', id = 'com.apple.systempreferences'},
-    {key = 'z', id = 'com.goodsnooze.MenuGPT'},
+    {key = 'w', name = 'weread'},
+    {key = 'y', id = 'com.apple.systempreferences'}
 }
 
 

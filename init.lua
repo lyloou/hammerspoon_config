@@ -96,13 +96,14 @@ switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(t
 switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome'} -- specialized switcher for your dozens of browser windows :)
 
 -- bind to hotkeys; WARNING: at least one modifier key is required!
-hs.hotkey.bind('alt','tab','Next window',function()switcher:next()end)
-hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher:previous()end)
+-- hs.hotkey.bind('alt','tab','Next window',function()switcher:next()end)
+-- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher:previous()end)
 
 -- alternatively, call .nextWindow() or .previousWindow() directly (same as hs.window.switcher.new():next())
-hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
+-- hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
 -- you can also bind to `repeatFn` for faster traversing
-hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
+-- hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
+
 
 ----------------------------------------------------------------------------------------------------
 --------------------------------------- appM 快速打开应用 ---------------------------------------------
@@ -112,7 +113,19 @@ spoon.ModalMgr:new("appM")
 local cmodal = spoon.ModalMgr.modal_list["appM"]
 cmodal:bind('', 'escape', '退出 ', function() spoon.ModalMgr:deactivate({"appM"}) end)
 cmodal:bind('', 'Q', '退出 ', function() spoon.ModalMgr:deactivate({"appM"}) end)
-cmodal:bind('', 'L', '锁屏 ', function() hs.caffeinate.lockScreen() end)
+-- cmodal:bind('', 'L', '锁屏 ', function() hs.caffeinate.lockScreen() end)
+cmodal:bind('', 'L', 'Launcher ', function()
+     hs.spaces.toggleLaunchPad() 
+     spoon.ModalMgr:deactivate({"appM"})
+    end)
+cmodal:bind('', 'A', 'Launcher ', function()
+        hs.spaces.toggleLaunchPad() 
+        spoon.ModalMgr:deactivate({"appM"})
+       end)    
+cmodal:bind('', 'D', '桌面 ', function() 
+    hs.spaces.toggleShowDesktop() 
+    spoon.ModalMgr:deactivate({"appM"})
+end)
 -- cmodal:bind('', 'tab', 'Toggle Cheatsheet', function() spoon.ModalMgr:toggleCheatsheet() end)
 if not hsapp_list then
     hsapp_list = {
