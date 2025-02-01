@@ -126,6 +126,11 @@ cmodal:bind('', 'D', '桌面 ', function()
     hs.spaces.toggleShowDesktop() 
     spoon.ModalMgr:deactivate({"appM"})
 end)
+cmodal:bind('', 'E', 'TODO ', function() 
+    hs.execute("open -a /Applications/SimpleMind\\ Pro.app /Users/lilou/w/desktop-media/_TODO.smmx")
+    spoon.ModalMgr:deactivate({"appM"})
+end)
+
 -- cmodal:bind('', 'tab', 'Toggle Cheatsheet', function() spoon.ModalMgr:toggleCheatsheet() end)
 if not hsapp_list then
     hsapp_list = {
@@ -532,3 +537,5 @@ spoon.ModalMgr.supervisor:enter()
 -- 将 shift+option+z 绑定到插入当前时间的函数
 -- 获取当前时间并将其插入到当前应用程序的光标位置
 hs.hotkey.bind({"shift", "option"}, "z", function() hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S")) end)
+
+hs.hotkey.bind({"shift", "option"}, "v", function() hs.execute("open -a /Applications/SimpleMind\\ Pro.app ~/w/desktop-media/Q-20250102-NBP看板/nbp看板2.0.smmx") end)
