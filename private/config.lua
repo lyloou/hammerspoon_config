@@ -18,6 +18,7 @@ hspoon_list = {
     "KSheet",
     "WinWin",
     "VolumeScroll",
+    "QuickText",
     "PopupTranslateSelection",
     -- "DeepLTranslate",
     -- "HSaria2",
@@ -33,30 +34,70 @@ hspoon_list = {
 -- 绑定 启动 app 快捷键
 
 hsapp_list = {
-    {key = '1', name = 'Visual Studio Code'},
-    {key = '2', name = 'Microsoft Edge'},
+    {key = '1', name = 'Cursor'},
+    {key = '2', id = 'com.google.Chrome'},
     {key = '3', name = 'IntelliJ IDEA'},
     {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
 
-    {key = 'z', name = 'Alacritty'},
-    {key = 'b', name = 'Notes'},
-    {key = 'e', name = 'Memos'},
+    {key = 'a', name = 'Notes'},
+    {key = 'b', name = 'Typora'},
+    {key = 'c', id = 'com.modelmakertools.simplemindmacpro'},
+    {key = 'e', id = 'com.yuque.app'},
     {key = 'f', name = 'Finder'},
     {key = 'g', name = 'DataGrip'},
     {key = 'i', name = 'IntelliJ IDEA'},
     {key = 'j', name = 'Typora'},
     {key = 'k', name = 'Keynote'},
-    {key = 's', name = 'Obsidian'},
+    {key = 's', id = 'com.modelmakertools.simplemindmacpro'},
     {key = 'o', name = 'Apifox'},
     {key = 'p', name = 'Podcasts'},
     {key = 't', name = 'WindTerm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
     {key = 'm', id = 'com.netease.163music'},
-    {key = 'n', id = 'com.navicat.NavicatPremium'},
-    {key = 'w', name = 'weread'},
-    {key = 'y', id = 'com.apple.systempreferences'}
+    {key = 'n', id = 'com.navicat.NavicatForMySQL'},
+    {key = 'w', name = 'Typora'},
+    {key = 'y', id = 'com.apple.systempreferences'},
+    {key = 'z', name = 'Alacritty'}
 }
 
+-- 快捷文字配置脚本
+QuickText_list = {
+    -- open url
+    ["oo1"] =
+    {
+        ["type"] = "url",
+        ["url"] = "https://www.hammerspoon.org/",
+    },
+    ["oo2"] =
+    {
+        ["type"] = "url",
+        ["url"] = "https://www.v2ex.com/",
+    },
+    ["oo3"] =
+    {
+        ["type"] = "url",
+        ["url"] = "https://github.com/",
+    },
+    -- search text
+    ["gg"] =
+    {
+        ["type"] = "search",
+        ["text"] = "https://www.google.com/search?q=",
+    },
+
+    --  expand text
+    ["t1"] =
+    {
+        ["type"] = "text",
+        ["text"] = "15057466****",
+    },
+    -- todo
+    ["todo"] =
+    {
+        ["type"] = "text",
+        ["text"] = "//TODO:",
+    },
+}
 
 ----------------------------------------------------------------------------------------------------
 ---------------------------------------- 模式快捷键绑定  ----------------------------------------------
