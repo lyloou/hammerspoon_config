@@ -538,4 +538,4 @@ spoon.ModalMgr.supervisor:enter()
 -- 获取当前时间并将其插入到当前应用程序的光标位置
 hs.hotkey.bind({"shift", "option"}, "z", function() hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S")) end)
 
-hs.hotkey.bind({"shift", "option"}, "v", function() hs.execute("open -a /Applications/SimpleMind\\ Pro.app ~/w/desktop-media/Q-20250102-NBP看板/nbp看板2.0.smmx") end)
+hs.hotkey.bind({"shift", "option"}, "v", function() hs.execute("open -a /Applications/SimpleMind\\ Pro.app ~/w/desktop-media/A-工具箱/A-工具箱.smmx") end)

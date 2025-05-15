@@ -39,7 +39,8 @@ hsapp_list = {
     {key = '3', name = 'IntelliJ IDEA'},
     {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
 
-    {key = 'a', name = 'Notes'},
+    {key = 's', name = 'Notes'},
+    {key = 'a', id = 'com.apple.reminders'},
     {key = 'b', name = 'Typora'},
     {key = 'c', id = 'com.modelmakertools.simplemindmacpro'},
     {key = 'f', name = 'Finder'},
@@ -48,11 +49,11 @@ hsapp_list = {
     {key = 'j', name = 'Typora'},
     {key = 'k', name = 'Keynote'},
     {key = 'o', name = 'Apifox'},
-    {key = 'p', name = 'Podcasts'},
+    {key = 'p', id = 'com.jetbrains.pycharm'},
     {key = 't', name = 'WindTerm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
     {key = 'm', id = 'com.netease.163music'},
-    {key = 'n', id = 'com.navicat.NavicatForMySQL'},
+    {key = 'n', id = 'com.navicat.NavicatPremium'},
     {key = 'w', name = 'Typora'},
     {key = 'y', id = 'com.apple.systempreferences'},
     {key = 'z', name = 'Alacritty'}
