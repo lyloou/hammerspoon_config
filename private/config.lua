@@ -38,25 +38,23 @@ hsapp_list = {
     {key = '2', id = 'com.google.Chrome'},
     {key = '3', name = 'IntelliJ IDEA'},
     {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
+    {key = '5', name = 'WindTerm'},
 
-    {key = 's', name = 'Notes'},
-    {key = 'a', id = 'com.apple.reminders'},
+    {key = 'a', name = 'Notes'},
+    {key = 't', id = 'com.apple.reminders'},
     {key = 'b', name = 'Typora'},
     {key = 'c', id = 'com.modelmakertools.simplemindmacpro'},
     {key = 'f', name = 'Finder'},
     {key = 'g', name = 'DataGrip'},
     {key = 'i', name = 'IntelliJ IDEA'},
-    {key = 'j', name = 'Typora'},
     {key = 'k', name = 'Keynote'},
     {key = 'o', name = 'Apifox'},
-    {key = 'p', id = 'com.jetbrains.pycharm'},
-    {key = 't', name = 'WindTerm'},
+    -- {key = 'p', id = 'com.jetbrains.pycharm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
-    {key = 'm', id = 'com.netease.163music'},
+    -- {key = 'm', id = 'com.netease.163music'},
     {key = 'n', id = 'com.navicat.NavicatPremium'},
-    {key = 'w', name = 'Typora'},
     {key = 'y', id = 'com.apple.systempreferences'},
-    {key = 'z', name = 'Alacritty'}
+    {key = 'z', id = 'com.github.wez.wezterm'}
 }
 
 -- 快捷文字配置脚本
