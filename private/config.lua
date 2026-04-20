@@ -36,6 +36,7 @@ hspoon_list = {
 hsapp_list = {
     {key = '1', name = 'Cursor'},
     {key = '2', id = 'com.google.Chrome'},
+    -- {key = '2', id = 'com.openai.atlas'},
     {key = '3', name = 'IntelliJ IDEA'},
     {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
     {key = '5', name = 'WindTerm'},
@@ -43,18 +44,25 @@ hsapp_list = {
     {key = 'a', name = 'Notes'},
     {key = 't', id = 'com.apple.reminders'},
     {key = 'b', name = 'Typora'},
-    {key = 'c', id = 'com.modelmakertools.simplemindmacpro'},
+    -- {key = 'c', id = 'com.openai.chat'},
+    -- {key = 'c', id = 'com.openai.atlas'},
+    -- {key = 'c', id = 'com.google.Chrome'},
+    {key = 'e', id = 'md.obsidian'},
+    {key = 's', id = 'com.modelmakertools.simplemindmacpro'},
+    -- {key = 'f', id = 'com.jinghaoshe.qspace.pro'},
     {key = 'f', name = 'Finder'},
-    {key = 'g', name = 'DataGrip'},
-    {key = 'i', name = 'IntelliJ IDEA'},
+    {key = 'g', name = 'IntelliJ IDEA'},
     {key = 'k', name = 'Keynote'},
     {key = 'o', name = 'Apifox'},
     -- {key = 'p', id = 'com.jetbrains.pycharm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
+    {key = 'w', id = 'net.cozic.joplin-desktop'},
     -- {key = 'm', id = 'com.netease.163music'},
     {key = 'n', id = 'com.navicat.NavicatPremium'},
+    {key = 'x', id = 'com.anthropic.claudefordesktop'},
     {key = 'y', id = 'com.apple.systempreferences'},
-    {key = 'z', id = 'com.github.wez.wezterm'}
+    -- {key = 'z', id = 'com.github.wez.wezterm'}
+    {key = 'z', id = 'com.mitchellh.ghostty'}
 }
 
 -- 快捷文字配置脚本
