@@ -181,5 +181,30 @@ hs.hotkey.bind({"alt","ctrl","shift"}, "-", function() setBrightness(_brightness
 hs.hotkey.bind({"alt","ctrl","shift"}, "=", function() setBrightness(_brightness + 10) end)
 
 ----------------------------------------------------------------------------------------------------
+----------------------------------------- 屏幕焦点切换 -----------------------------------------------
+-- Option + Ctrl + Shift + [: 上一个屏幕  ]: 下一个屏幕 (鼠标移至屏幕中心)
+----------------------------------------------------------------------------------------------------
+local function focusScreen(dir)
+    local screens = hs.screen.allScreens()
+    local current = hs.mouse.getCurrentScreen()
+    local idx = 1
+    for i, s in ipairs(screens) do
+        if s:id() == current:id() then idx = i; break end
+    end
+    local target = screens[(idx - 1 + dir + #screens) % #screens + 1]
+    local f = target:frame()
+    hs.mouse.setAbsolutePosition({x = f.x + f.w / 2, y = f.y + f.h / 2})
+    for _, w in ipairs(hs.window.orderedWindows()) do
+        if w:screen():id() == target:id() and w:isStandard() then
+            w:focus()
+            break
+        end
+    end
+end
+
+hs.hotkey.bind({"alt","ctrl","shift"}, "[", function() focusScreen(-1) end)
+hs.hotkey.bind({"alt","ctrl","shift"}, "]", function() focusScreen(1) end)
+
+----------------------------------------------------------------------------------------------------
 ---------------------------------------------- end  ------------------------------------------------
 ----------------------------------------------------------------------------------------------------
