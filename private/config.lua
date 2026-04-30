@@ -161,5 +161,25 @@ hshelp_keys = {{"alt", "shift"}, "/"}
 
 
 ----------------------------------------------------------------------------------------------------
+----------------------------------------- 屏幕亮度控制 -----------------------------------------------
+-- Option + Ctrl + Shift + 0: 0%  9: 100%  -: -10  =: +10 (两屏同步)
+----------------------------------------------------------------------------------------------------
+local _bdc = "/opt/homebrew/bin/betterdisplaycli"
+local _brightness = math.floor(hs.brightness.get())
+
+local function setBrightness(level)
+    level = math.max(0, math.min(100, level))
+    _brightness = level
+    hs.brightness.set(level)
+    hs.task.new(_bdc, nil, {"set", "--name-like=PHL", "--brightness=" .. level .. "%"}):start()
+    hs.alert.show("亮度 " .. level .. "%")
+end
+
+hs.hotkey.bind({"alt","ctrl","shift"}, "0", function() setBrightness(0) end)
+hs.hotkey.bind({"alt","ctrl","shift"}, "9", function() setBrightness(80) end)
+hs.hotkey.bind({"alt","ctrl","shift"}, "-", function() setBrightness(_brightness - 10) end)
+hs.hotkey.bind({"alt","ctrl","shift"}, "=", function() setBrightness(_brightness + 10) end)
+
+----------------------------------------------------------------------------------------------------
 ---------------------------------------------- end  ------------------------------------------------
 ----------------------------------------------------------------------------------------------------
