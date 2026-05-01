@@ -162,23 +162,35 @@ hshelp_keys = {{"alt", "shift"}, "/"}
 
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------- 屏幕亮度控制 -----------------------------------------------
--- Option + Ctrl + Shift + 0: 0%  9: 100%  -: -10  =: +10 (两屏同步)
+-- Option + Ctrl + Shift + 0: 0%  9: 100%  -: -10  =: +10（所有活动显示器同步，见 plugins/set_brightness）
 ----------------------------------------------------------------------------------------------------
-local _m1ddc = "/opt/homebrew/bin/m1ddc"
-local _brightness = math.floor(hs.brightness.get())
+local _brightnessBin = hs.configdir .. "/plugins/set_brightness"
+local _brightnessStep = 10
+--- 当前亮度百分比（0～100），用于增减步进；可能与外接屏实际值略不同步。
+local _brightnessLevel = math.floor(hs.brightness.get())
 
+--- 将亮度设为 0～100，优先调用 plugins/set_brightness（0～1 浮点）同步各屏；无二进制时回退 hs.brightness。
+---@param level number 目标亮度（百分比）
 local function setBrightness(level)
-    level = math.max(0, math.min(100, level))
-    _brightness = level
-    hs.brightness.set(level)
-    hs.task.new(_m1ddc, nil, {"set", "luminance", tostring(level)}):start()
+    level = math.max(0, math.min(100, math.floor(level + 0.5)))
+    _brightnessLevel = level
+    local frac = string.format("%.4f", level / 100)
+    if hs.fs.attributes(_brightnessBin, "mode") then
+        hs.task.new(_brightnessBin, function(exitCode, _, stdErr)
+            if exitCode ~= 0 then
+                hs.alert.show("set_brightness 失败: " .. (stdErr or ("exit " .. tostring(exitCode))), 1.5)
+            end
+        end, { frac }):start()
+    else
+        hs.brightness.set(level)
+    end
     hs.alert.show("亮度 " .. level .. "%")
 end
 
-hs.hotkey.bind({"alt","ctrl","shift"}, "0", function() setBrightness(0) end)
-hs.hotkey.bind({"alt","ctrl","shift"}, "9", function() setBrightness(80) end)
-hs.hotkey.bind({"alt","ctrl","shift"}, "-", function() setBrightness(_brightness - 10) end)
-hs.hotkey.bind({"alt","ctrl","shift"}, "=", function() setBrightness(_brightness + 10) end)
+hs.hotkey.bind({"alt", "ctrl", "shift"}, "0", function() setBrightness(0) end)
+hs.hotkey.bind({"alt", "ctrl", "shift"}, "9", function() setBrightness(90) end)
+hs.hotkey.bind({"alt", "ctrl", "shift"}, "-", function() setBrightness(_brightnessLevel - _brightnessStep) end)
+hs.hotkey.bind({"alt", "ctrl", "shift"}, "=", function() setBrightness(_brightnessLevel + _brightnessStep) end)
 
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------- 屏幕焦点切换 -----------------------------------------------
