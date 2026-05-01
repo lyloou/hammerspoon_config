@@ -187,10 +187,10 @@ local function setBrightness(level)
     hs.alert.show("亮度 " .. level .. "%")
 end
 
-hs.hotkey.bind({"alt", "ctrl", "shift"}, "0", function() setBrightness(0) end)
-hs.hotkey.bind({"alt", "ctrl", "shift"}, "9", function() setBrightness(90) end)
-hs.hotkey.bind({"alt", "ctrl", "shift"}, "-", function() setBrightness(_brightnessLevel - _brightnessStep) end)
-hs.hotkey.bind({"alt", "ctrl", "shift"}, "=", function() setBrightness(_brightnessLevel + _brightnessStep) end)
+hs.hotkey.bind({"ctrl", "shift"}, "f1", function() setBrightness(0) end)
+hs.hotkey.bind({"ctrl", "shift"}, "f2", function() setBrightness(90) end)
+-- hs.hotkey.bind({"alt", "ctrl", "shift"}, "-", function() setBrightness(_brightnessLevel - _brightnessStep) end)
+-- hs.hotkey.bind({"alt", "ctrl", "shift"}, "=", function() setBrightness(_brightnessLevel + _brightnessStep) end)
 
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------- 屏幕焦点切换 -----------------------------------------------
@@ -214,8 +214,8 @@ local function focusScreen(dir)
     end
 end
 
-hs.hotkey.bind({"alt","ctrl","shift"}, "[", function() focusScreen(-1) end)
-hs.hotkey.bind({"alt","ctrl","shift"}, "]", function() focusScreen(1) end)
+-- hs.hotkey.bind({"alt","ctrl","shift"}, "[", function() focusScreen(-1) end)
+-- hs.hotkey.bind({"alt","ctrl","shift"}, "]", function() focusScreen(1) end)
 
 ----------------------------------------------------------------------------------------------------
 ---------------------------------------------- end  ------------------------------------------------
