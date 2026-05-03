@@ -44,7 +44,7 @@ hsapp_list = {
     {key = 'a', name = 'Notes'},
     {key = 't', id = 'com.apple.reminders'},
     {key = 'b', name = 'Typora'},
-    -- {key = 'c', id = 'com.openai.chat'},
+    {key = 'c', id = 'com.openai.codex'},
     -- {key = 'c', id = 'com.openai.atlas'},
     -- {key = 'c', id = 'com.google.Chrome'},
     {key = 'e', id = 'md.obsidian'},
@@ -188,7 +188,7 @@ local function setBrightness(level)
 end
 
 hs.hotkey.bind({"ctrl", "shift"}, "f1", function() setBrightness(0) end)
-hs.hotkey.bind({"ctrl", "shift"}, "f2", function() setBrightness(90) end)
+hs.hotkey.bind({"ctrl", "shift"}, "f2", function() setBrightness(85) end)
 -- hs.hotkey.bind({"alt", "ctrl", "shift"}, "-", function() setBrightness(_brightnessLevel - _brightnessStep) end)
 -- hs.hotkey.bind({"alt", "ctrl", "shift"}, "=", function() setBrightness(_brightnessLevel + _brightnessStep) end)
 
