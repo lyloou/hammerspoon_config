@@ -1,0 +1,24 @@
+private/config.lua
+  s_5b12e8708830c7::t_1cbba5fbda9191 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "c6413cd030704f611c88d4f07ca6f0fec2a77764",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_5b12e8708830c7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3fd6-13ff-7262-9b3c-53f3c305b300",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
