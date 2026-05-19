@@ -57,7 +57,6 @@ hs.loadSpoon("ModalMgr")
 -- 定义默认加载的 Spoons
 if not hspoon_list then
     hspoon_list = {
-        "ClipShow", -- 剪切板
         "KSheet", -- 快捷键
         "CountDown", -- 倒计时
         "WinWin", -- 窗口管理
@@ -178,73 +177,6 @@ if string.len(hsappM_keys[2]) > 0 then
         spoon.ModalMgr:activate({"appM"}, "#FFBD2E", true)
     end)
 end
-
-----------------------------------------------------------------------------------------------------
----------------------------------------- clipshowM 配置 ---------------------------------------------
-----------------------------------------------------------------------------------------------------
-if spoon.ClipShow then
-    spoon.ModalMgr:new("clipshowM")
-    local cmodal = spoon.ModalMgr.modal_list["clipshowM"]
-    cmodal:bind('', 'escape', '退出 剪切板', function()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'Q', '退出 剪切板', function()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'N', '保存此会话', function()
-        spoon.ClipShow:saveToSession()
-    end)
-    cmodal:bind('', 'R', '恢复上一个会话', function()
-        spoon.ClipShow:restoreLastSession()
-    end)
-    cmodal:bind('', 'B', '在浏览器中打开', function()
-        spoon.ClipShow:openInBrowserWithRef()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'S', '用百度搜索', function()
-        spoon.ClipShow:openInBrowserWithRef("https://www.baidu.com/search?q=")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'F', '保存到桌面', function()
-        spoon.ClipShow:saveToFile()
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'H', '在 Github 中搜索', function()
-        spoon.ClipShow:openInBrowserWithRef("https://github.com/search?q=")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'G', '使用 Google 搜索', function()
-        spoon.ClipShow:openInBrowserWithRef("https://www.google.com/search?q=")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-    cmodal:bind('', 'L', '用 Sublime Text 打开', function()
-        spoon.ClipShow:openWithCommand("/usr/local/bin/subl")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
-
-    -- 绑定功 clipshowM 快捷键
-    hsclipsM_keys = hsclipsM_keys or {"alt", "C"}
-    if string.len(hsclipsM_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsclipsM_keys[1], hsclipsM_keys[2], "打开剪切板面板", function()
-            spoon.ClipShow:toggleShow()
-            if spoon.ClipShow.canvas:isShowing() then
-                spoon.ModalMgr:deactivateAll()
-                spoon.ModalMgr:activate({"clipshowM"})
-            end
-        end)
-    end
-end
-
-
-
 
 ----------------------------------------------------------------------------------------------------
 -- 在浏览器中打开 Hammerspoon API 手册

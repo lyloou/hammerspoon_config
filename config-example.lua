@@ -12,7 +12,6 @@
 
 --指定要启用的模块
 hspoon_list = {
-    "ClipShow",
     "CountDown",
     "KSheet",
     "WinHints",
@@ -68,10 +67,6 @@ hswhints_keys = {"alt", "c"}
 
 -- 快速启动面板快捷键绑定
 hsappM_keys = {"alt", "A"}
-
--- 系统剪切板快捷键绑定
-hsclipsM_keys = {"alt", "C"}
-
 
 -- 在默认浏览器中打开 Hammerspoon 和 Spoons API 手册
 --hsman_keys = {"alt", "H"}
