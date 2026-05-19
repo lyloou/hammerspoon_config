@@ -12,6 +12,7 @@
 
 --指定要启用的模块
 hspoon_list = {
+    "BingDaily",
     -- "ClipShow",
     -- "CountDown",
     "KSheet",
