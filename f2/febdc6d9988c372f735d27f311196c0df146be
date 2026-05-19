@@ -1,0 +1,24 @@
+README.md
+  s_5b12e8708830c7::t_e699cc6f8beb8a 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "f2febdc6d9988c372f735d27f311196c0df146be",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_5b12e8708830c7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3fd6-13ff-7262-9b3c-53f3c305b300",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
