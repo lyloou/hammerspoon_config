@@ -1,0 +1,37 @@
+config-example.lua
+  s_5b12e8708830c7::t_fe5c38eddd08a7 19
+init.lua
+  s_5b12e8708830c7::t_cbd0419f12cc69 89-92
+private/config.lua
+  s_5b12e8708830c7::t_b182ce067a5f0b 19
+Spoons/WinHints.spoon/init.lua
+  s_5b12e8708830c7::t_15d4fff066cc56 1-14,20,23,29-72,78-93,95-98,101-102,105-106,108-110,113-118,121-226
+  s_5b12e8708830c7::t_cc4f1521a2174f 16,99-100,112,119-120
+  s_5b12e8708830c7::t_c3a37699d7daed 24-28,94
+  s_5b12e8708830c7::t_84b897e9c94095 77,111
+  s_5b12e8708830c7::t_2b1505e9109bdc 15,17,19,74-76
+  s_5b12e8708830c7::t_a6022f45d958fd 21-22,103-104,107
+  s_5b12e8708830c7::t_512a6b5de8e616 18
+  s_5b12e8708830c7::t_f86392add855c1 73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "dfdc8467c1f4a1e91982add16c0ff89e4c567499",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_5b12e8708830c7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3fd6-13ff-7262-9b3c-53f3c305b300",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
