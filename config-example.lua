@@ -16,6 +16,7 @@ hspoon_list = {
     "ClipShow",
     "CountDown",
     "KSheet",
+    "WinSwitcher",
     "WinWin",
     "VolumeScroll",
     "PopupTranslateSelection",
