@@ -57,7 +57,6 @@ hs.loadSpoon("ModalMgr")
 -- 定义默认加载的 Spoons
 if not hspoon_list then
     hspoon_list = {
-        "AClock", -- 一个钟
         "ClipShow", -- 剪切板
         "KSheet", -- 快捷键
         "CountDown", -- 倒计时
@@ -403,17 +402,6 @@ if spoon.KSheet then
     end
 end
 
-----------------------------------------------------------------------------------------------------
--- 绑定 AClock 快捷键
-----------------------------------------------------------------------------------------------------
-if spoon.AClock then
-    hsaclock_keys = hsaclock_keys or {"alt", "T"}
-    if string.len(hsaclock_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsaclock_keys[1], hsaclock_keys[2], "时钟", function() spoon.AClock:toggleShow() end)
-    end
-end
---
-----------------------------------------------------------------------------------------------------
 --  绑定 PopupTranslateSelection 快捷键
 ----------------------------------------------------------------------------------------------------
 -- 弹出选中词的翻译面板

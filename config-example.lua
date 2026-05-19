@@ -12,7 +12,6 @@
 
 --指定要启用的模块
 hspoon_list = {
-    "AClock",
     "ClipShow",
     "CountDown",
     "KSheet",
@@ -88,9 +87,6 @@ hsresizeM_keys = {"alt", "R"}
 
 -- 定义应用程序快捷键面板快捷键
 hscheats_keys = {"alt", "S"}
-
--- 显示时钟快捷键绑定
-hsaclock_keys = {"alt", "T"}
 
 -- 粘贴 chrome 或 safari 打开最前置的网址
 hstype_keys = {"alt", "V"}

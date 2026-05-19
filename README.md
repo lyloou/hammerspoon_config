@@ -85,13 +85,6 @@ cd ~/.hammerspoon && git pull
 ![启动器](https://i.loli.net/2019/07/06/5d2019368b6dc67355.png)
 
 
-### AClock - 显示当前时间
-
-按下 `Option` + `t` 显示当前时间。
-
-![时钟](https://i.loli.net/2019/07/06/5d201936dbfdf69558.png)
-
-
 ### 倒计时（番茄钟）
 
 按下 `Option` + `i` 打开倒计时面板，按下对应数字开始计时。
