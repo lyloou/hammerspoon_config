@@ -57,7 +57,13 @@ hsapp_list = {
 ---------------------------------------- 模式快捷键绑定  ----------------------------------------------
 
 -- 窗口提示键绑定，快速切换到你想要的窗口上
-hswhints_keys = {"alt", "tab"}
+hswhints_keys = {"alt", "c"}
+
+-- Alt+Tab 跨应用窗口 / Alt+` 应用内窗口（格式：{修饰键表}, "按键"）
+-- hscrossAppWindowSwitcher_keys = {{"alt"}, "tab"}
+-- hscrossAppWindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
+-- hswindowSwitcher_keys = {{"alt"}, "`"}
+-- hswindowSwitcher_prev_keys = {{"alt", "shift"}, "`"}
 
 -- 快速启动面板快捷键绑定
 hsappM_keys = {"alt", "A"}

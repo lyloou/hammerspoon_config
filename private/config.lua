@@ -42,18 +42,20 @@ hsapp_list = {
     {key = '5', name = 'WindTerm'},
 
     {key = 'a', name = 'Notes'},
-    {key = 't', id = 'com.apple.reminders'},
     {key = 'b', name = 'Typora'},
     {key = 'c', id = 'com.openai.codex'},
     -- {key = 'c', id = 'com.openai.atlas'},
     -- {key = 'c', id = 'com.google.Chrome'},
     {key = 'e', id = 'md.obsidian'},
+    {key = 'r', id = 'com.apple.reminders'},
     {key = 's', id = 'com.modelmakertools.simplemindmacpro'},
+    {key = 't', id = 'com.lyloou.texttool'},
     -- {key = 'f', id = 'com.jinghaoshe.qspace.pro'},
     {key = 'f', name = 'Finder'},
     {key = 'g', name = 'IntelliJ IDEA'},
     {key = 'k', name = 'Keynote'},
-    {key = 'o', name = 'Apifox'},
+    -- {key = 'o', name = 'Apifox'},
+    {key = 'o', id = 'com.usebruno.app'},
     -- {key = 'p', id = 'com.jetbrains.pycharm'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
     {key = 'w', id = 'net.cozic.joplin-desktop'},
@@ -108,7 +110,15 @@ QuickText_list = {
 ---------------------------------------- 模式快捷键绑定  ----------------------------------------------
 
 -- 窗口提示键绑定，快速切换到你想要的窗口上
-hswhints_keys = {"alt", "tab"}
+hswhints_keys = {"alt", "c"}
+
+-- Alt+Tab：当前 Space 跨应用切换（每应用一项，最近窗口）；Alt+Shift+Tab 反向
+hscrossAppWindowSwitcher_keys = {{"alt"}, "tab"}
+hscrossAppWindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
+
+-- Alt+`：当前应用内切换窗口；Alt+Shift+` 反向
+hswindowSwitcher_keys = {{"alt"}, "`"}
+hswindowSwitcher_prev_keys = {{"alt", "shift"}, "`"}
 
 -- 快速启动面板快捷键绑定
 hsappM_keys = {"alt", "A"}

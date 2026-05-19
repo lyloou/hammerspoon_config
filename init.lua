@@ -82,27 +82,304 @@ end
 ----------------------------------------------------------------------------------------------------
 -- 定义 windowHints 快捷键
 ----------------------------------------------------------------------------------------------------
--- hswhints_keys = hswhints_keys or {"alt", "tab"}
--- if string.len(hswhints_keys[2]) > 0 then
---     spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
---         spoon.ModalMgr:deactivateAll()
---         hs.hints.windowHints()
---     end)
--- end
--- set up your windowfilter
--- set up your windowfilter
-switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
-switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
-switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome'} -- specialized switcher for your dozens of browser windows :)
+hswhints_keys = hswhints_keys or {"alt", "c"}
+if string.len(hswhints_keys[2]) > 0 then
+    spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
+        spoon.ModalMgr:deactivateAll()
+        hs.hints.windowHints()
+    end)
+end
 
--- bind to hotkeys; WARNING: at least one modifier key is required!
--- hs.hotkey.bind('alt','tab','Next window',function()switcher:next()end)
--- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher:previous()end)
+-- Alt+Tab 跨应用 / Alt+` 应用内窗口切换（共用 UI；快捷键在 private/config.lua 配置）
+local switcherUiPrefs = {
+    showSelectedThumbnail = false,
+    showTitles = true,
+    thumbnailSize = 250,
+    textSize = 16,
+}
 
--- alternatively, call .nextWindow() or .previousWindow() directly (same as hs.window.switcher.new():next())
--- hs.hotkey.bind('alt','tab','Next window',hs.window.switcher.nextWindow)
--- you can also bind to `repeatFn` for faster traversing
--- hs.hotkey.bind('alt-shift','tab','Prev window',hs.window.switcher.previousWindow,nil,hs.window.switcher.previousWindow)
+local switcherUnavailableIcon = hs.image.imageFromName("NSStopProgressTemplate")
+local switcherSnapshotCache = {}
+local switcherSnapshotTtl = 45
+local switcherTitleGap = 1
+local switcherIconSizeRatio = 0.26
+local switcherIconBottomMargin = 3
+local switcherPanelPadding = 8
+local switcherTopPadding = 2
+local switcherBottomPadding = 4
+local switcherHighlightPad = 4
+local switcherModifierPrefetch = { alt = false }
+
+--- 获取窗口缩略图（带本地缓存，避免重复截图）。
+--- @param windowId number|nil
+--- @return hs.image
+local function getSwitcherSnapshot(windowId)
+    if not windowId then
+        return switcherUnavailableIcon
+    end
+    local cached = switcherSnapshotCache[windowId]
+    local now = hs.timer.secondsSinceEpoch()
+    if not cached or cached[2] + switcherSnapshotTtl < now then
+        switcherSnapshotCache[windowId] = {
+            hs.window.snapshotForID(windowId) or switcherUnavailableIcon,
+            now,
+        }
+    end
+    return switcherSnapshotCache[windowId][1]
+end
+
+--- 返回窗口标题。
+--- @param win hs.window
+--- @return string
+local function getWindowSwitcherTitle(win)
+    return win:title() or " "
+end
+
+--- 返回应用名称（跨应用切换每项代表一个应用）。
+--- @param win hs.window
+--- @return string
+local function getAppSwitcherTitle(win)
+    local app = win:application()
+    return (app and app:name()) or " "
+end
+
+--- 跨应用切换列表：当前 Space 可见窗口，每个应用仅保留最近使用的一个代表窗口。
+--- @param wf hs.window.filter
+--- @return hs.window[]
+local function buildCrossAppSwitcherWindows(wf)
+    local seen = {}
+    local windows = {}
+    for _, win in ipairs(wf:getWindows(hs.window.filter.sortByFocusedLast)) do
+        local app = win:application()
+        if app then
+            local pid = app:pid()
+            if not seen[pid] then
+                seen[pid] = true
+                table.insert(windows, win)
+            end
+        end
+    end
+    return windows
+end
+
+--- 预取 switcher 窗口列表与缩略图。
+--- @param sw hs.window.switcher
+--- @param buildWindowsFn function|nil
+local function prefetchSwitcher(sw, buildWindowsFn)
+    if sw.selected then
+        return
+    end
+    sw.windows = buildWindowsFn and buildWindowsFn() or sw.wf:getWindows(hs.window.filter.sortByFocusedLast)
+    if not sw.ui.showThumbnails then
+        return
+    end
+    for _, win in ipairs(sw.windows) do
+        local windowId = win:id()
+        hs.timer.doAfter(0, function()
+            getSwitcherSnapshot(windowId)
+        end)
+    end
+end
+
+--- 松开修饰键且 switcher 未激活时清理预取缓存。
+--- @param sw hs.window.switcher
+local function clearSwitcherPrefetch(sw)
+    if not sw.selected then
+        sw.windows = nil
+    end
+end
+
+--- 收紧 switcher 布局：标题间距、图标大小、面板留白。
+--- @param sw hs.window.switcher
+local function adjustSwitcherLayout(sw)
+    local windows, drawings, ui = sw.windows, sw.drawings, sw.ui
+    if not windows or not drawings then
+        return
+    end
+    local nwindows = #windows
+    local size = drawings.size
+    if not size then
+        return
+    end
+    local titleHeight = ui.showTitles and ui.titleHeight or 0
+    local titleGap = ui.showTitles and switcherTitleGap or 0
+    local hPad = switcherPanelPadding
+    local screenFrame = drawings.screenFrame or hs.screen.mainScreen():frame()
+    local bgH = switcherTopPadding + titleHeight + titleGap + size + switcherBottomPadding
+    local bgW = hPad + (size + hPad) * nwindows
+    local bgframe = hs.geometry(0, 0, bgW, bgH):setcenter(screenFrame.center)
+    drawings.background:setFrame(bgframe):setRoundedRectRadii(hPad, hPad)
+    local iconSize = size * switcherIconSizeRatio
+    for i = 1, nwindows do
+        local dr = drawings[i]
+        local thumbFrame = hs.geometry(bgframe.x, bgframe.y, size, size)
+            :move(hPad + (size + hPad) * (i - 1), switcherTopPadding + titleHeight + titleGap)
+        if dr.thumb then
+            dr.thumb:setFrame(thumbFrame)
+        end
+        if dr.icon then
+            local iconFrame
+            if ui.showThumbnails then
+                iconFrame = hs.geometry.copy(thumbFrame)
+                    :setw(iconSize)
+                    :seth(iconSize)
+                    :move((size - iconSize) / 2, size - iconSize - switcherIconBottomMargin)
+            else
+                iconFrame = thumbFrame
+            end
+            dr.icon:setFrame(iconFrame)
+        end
+        if ui.showTitles then
+            dr.titleFrame = hs.geometry(thumbFrame.x, thumbFrame.y - titleGap - titleHeight, thumbFrame.w, titleHeight)
+        end
+        local hp = switcherHighlightPad
+        dr.highlightFrame = hs.geometry.copy(thumbFrame)
+            :move(-hp, -hp - titleHeight - titleGap)
+            :setw(size + hp * 2)
+            :seth(size + hp * 2 + titleHeight + titleGap)
+    end
+    local selected = sw.selected
+    if selected and drawings[selected] then
+        drawings.highlightRect:setFrame(drawings[selected].highlightFrame)
+    end
+end
+
+--- 立即绘制 switcher 面板（跳过内置 0.15s 延迟）。
+--- @param sw hs.window.switcher
+--- @param getTitleFn function
+local function renderSwitcherPanel(sw, getTitleFn)
+    if sw.drawDelayed and sw.drawDelayed:running() then
+        sw.drawDelayed:stop()
+    end
+    local windows, drawings, ui = sw.windows, sw.drawings, sw.ui
+    if not windows or not drawings or not sw.selected then
+        return
+    end
+    adjustSwitcherLayout(sw)
+    local haveThumbs, haveTitles = ui.showThumbnails, ui.showTitles
+    local size = drawings.size
+    drawings.background:show()
+    drawings.highlightRect:show()
+    for i = 1, #windows do
+        local win, dr = windows[i], drawings[i]
+        if haveThumbs and dr.thumb then
+            dr.thumb:setImage(getSwitcherSnapshot(win:id())):show()
+        end
+        if dr.icon then
+            local app = win:application()
+            local bundleId = app and app:bundleID()
+            local icon = bundleId and hs.image.imageFromAppBundle(bundleId) or switcherUnavailableIcon
+            dr.icon:setImage(icon):show()
+        end
+        if haveTitles and dr.titleRect and dr.titleFrame then
+            local title = getTitleFn(win)
+            local titleFrame = dr.titleFrame
+            local titleWidth = hs.drawing.getTextDrawingSize(title, ui.titleTextStyle).w * 1.1
+            if size and titleWidth < titleFrame.w then
+                titleFrame = hs.geometry.copy(titleFrame):setw(titleWidth):move((size - titleWidth) / 2, 0)
+            end
+            dr.titleRect:setFrame(titleFrame):show()
+            dr.titleText:setFrame(titleFrame):setText(title):show()
+        end
+    end
+end
+
+--- 创建 switcher 的 next/previous 回调。
+--- @param sw hs.window.switcher
+--- @param buildWindowsFn function|nil 非 nil 时每次切换前注入窗口列表
+--- @param getTitleFn function
+--- @return function nextFn
+--- @return function prevFn
+local function makeSwitcherStepFns(sw, buildWindowsFn, getTitleFn)
+    local function step(direction)
+        if buildWindowsFn then
+            sw.windows = buildWindowsFn()
+        end
+        if direction > 0 then
+            sw:next()
+        else
+            sw:previous()
+        end
+        renderSwitcherPanel(sw, getTitleFn)
+    end
+    return function()
+        step(1)
+    end, function()
+        step(-1)
+    end
+end
+
+--- 绑定 switcher 快捷键。
+--- @param keys table {modifiers, key}
+--- @param prevKeys table {modifiers, key}
+--- @param nextFn function
+--- @param prevFn function
+--- @param nextLabel string
+--- @param prevLabel string
+local function bindSwitcherHotkeys(keys, prevKeys, nextFn, prevFn, nextLabel, prevLabel)
+    if keys and keys[2] and string.len(keys[2]) > 0 then
+        hs.hotkey.bind(keys[1], keys[2], nextLabel, nextFn, nil, nextFn)
+    end
+    if prevKeys and prevKeys[2] and string.len(prevKeys[2]) > 0 then
+        hs.hotkey.bind(prevKeys[1], prevKeys[2], prevLabel, prevFn, nil, prevFn)
+    end
+end
+
+-- Alt+`：当前应用内切换窗口
+local windowSwitcherFilter = hs.window.filter.new()
+windowSwitcherFilter:setDefaultFilter({
+    visible = true,
+    activeApplication = true,
+})
+switcher = hs.window.switcher.new(windowSwitcherFilter, switcherUiPrefs)
+
+-- Alt+Tab：当前 Space 跨应用切换（每应用仅最近使用的一个窗口）
+local crossAppWindowSwitcherFilter = hs.window.filter.new()
+crossAppWindowSwitcherFilter:setCurrentSpace(true)
+crossAppWindowSwitcherFilter:setDefaultFilter({
+    visible = true,
+})
+crossAppWindowSwitcher = hs.window.switcher.new(crossAppWindowSwitcherFilter, switcherUiPrefs)
+
+local function refreshCrossAppSwitcherWindows()
+    return buildCrossAppSwitcherWindows(crossAppWindowSwitcherFilter)
+end
+
+local switchToNextWindow, switchToPreviousWindow = makeSwitcherStepFns(switcher, nil, getWindowSwitcherTitle)
+local switchToNextCrossAppWindow, switchToPreviousCrossAppWindow = makeSwitcherStepFns(
+    crossAppWindowSwitcher,
+    refreshCrossAppSwitcherWindows,
+    getAppSwitcherTitle
+)
+
+local switcherPrefetchTap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+    local altDown = event:getFlags().alt
+    if altDown and not switcherModifierPrefetch.alt then
+        prefetchSwitcher(switcher, nil)
+        prefetchSwitcher(crossAppWindowSwitcher, refreshCrossAppSwitcherWindows)
+    elseif not altDown and switcherModifierPrefetch.alt then
+        clearSwitcherPrefetch(switcher)
+        clearSwitcherPrefetch(crossAppWindowSwitcher)
+    end
+    switcherModifierPrefetch.alt = altDown
+    return false
+end)
+switcherPrefetchTap:start()
+
+hswindowSwitcher_keys = hswindowSwitcher_keys or {{"alt"}, "`"}
+hswindowSwitcher_prev_keys = hswindowSwitcher_prev_keys or {{"alt", "shift"}, "`"}
+hscrossAppWindowSwitcher_keys = hscrossAppWindowSwitcher_keys or hsappSwitcher_keys or {{"alt"}, "tab"}
+hscrossAppWindowSwitcher_prev_keys = hscrossAppWindowSwitcher_prev_keys or hsappSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
+
+bindSwitcherHotkeys(hswindowSwitcher_keys, hswindowSwitcher_prev_keys, switchToNextWindow, switchToPreviousWindow, "应用内下一窗口", "应用内上一窗口")
+bindSwitcherHotkeys(
+    hscrossAppWindowSwitcher_keys,
+    hscrossAppWindowSwitcher_prev_keys,
+    switchToNextCrossAppWindow,
+    switchToPreviousCrossAppWindow,
+    "跨应用下一窗口",
+    "跨应用上一窗口"
+)
 
 
 ----------------------------------------------------------------------------------------------------
