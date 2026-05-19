@@ -86,7 +86,10 @@ hswhints_keys = hswhints_keys or {"alt", "c"}
 if string.len(hswhints_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
         spoon.ModalMgr:deactivateAll()
-        hs.hints.windowHints()
+        if not spoon.WinHints then
+            hs.loadSpoon("WinHints")
+        end
+        spoon.WinHints:show()
     end)
 end
 
