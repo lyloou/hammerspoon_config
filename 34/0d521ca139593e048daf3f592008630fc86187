@@ -1,0 +1,24 @@
+init.lua
+  s_5b12e8708830c7::t_0b637532901ad2 147-149,151-152
+  s_5b12e8708830c7::t_f20d18e535b306 113,161,166
+  s_5b12e8708830c7::t_9371fddbcc24a1 150
+  s_5b12e8708830c7::t_63e79486778997 114,452,458,460-461,477
+  s_5b12e8708830c7::t_df6970c592d4a0 220-232,291,379
+  s_5b12e8708830c7::t_da5f57a86a70ed 454-456
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "340d521ca139593e048daf3f592008630fc86187",
+  "prompts": {},
+  "sessions": {
+    "s_5b12e8708830c7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3fd6-13ff-7262-9b3c-53f3c305b300",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
