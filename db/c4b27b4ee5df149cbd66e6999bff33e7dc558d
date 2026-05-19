@@ -1,0 +1,27 @@
+init.lua
+  s_5b12e8708830c7::t_8b3f1b06b8dd1f 93,102-107
+  s_5b12e8708830c7::t_b784709cc72b0e 99-101
+private/config.lua
+  s_5b12e8708830c7::t_e1320d83d7f064 19
+Spoons/WinSwitcher.spoon/init.lua
+  s_5b12e8708830c7::t_885d657677ce40 374-376
+  s_5b12e8708830c7::t_fe08b353f4d0ab 1-373,377-389
+config-example.lua
+  s_5b12e8708830c7::t_beaffe209fc68e 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "dbc4b27b4ee5df149cbd66e6999bff33e7dc558d",
+  "prompts": {},
+  "sessions": {
+    "s_5b12e8708830c7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3fd6-13ff-7262-9b3c-53f3c305b300",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
