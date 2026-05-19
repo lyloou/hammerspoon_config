@@ -110,6 +110,8 @@ local switcherBottomPadding = 4
 local switcherHighlightPad = 4
 local switcherModifierPrefetch = { alt = false }
 local switcherSelectedAppPid = nil
+local switcherAppWindowCounts = {}
+local switcherUsingSelectedApp = false
 local crossAppWindowSwitcherFilter = nil
 
 --- 获取窗口缩略图（带本地缓存，避免重复截图）。
@@ -142,7 +144,12 @@ end
 --- @return string
 local function getAppSwitcherTitle(win)
     local app = win:application()
-    return (app and app:name()) or " "
+    local name = (app and app:name()) or " "
+    local count = app and switcherAppWindowCounts[app:pid()] or nil
+    if count and count > 1 then
+        return string.format("%s 「+%d」", name, count - 1)
+    end
+    return name
 end
 
 --- 跨应用切换列表：当前 Space 可见窗口，每个应用仅保留最近使用的一个代表窗口。
@@ -151,10 +158,12 @@ end
 local function buildCrossAppSwitcherWindows(wf)
     local seen = {}
     local windows = {}
+    switcherAppWindowCounts = {}
     for _, win in ipairs(wf:getWindows(hs.window.filter.sortByFocusedLast)) do
         local app = win:application()
         if app then
             local pid = app:pid()
+            switcherAppWindowCounts[pid] = (switcherAppWindowCounts[pid] or 0) + 1
             if not seen[pid] then
                 seen[pid] = true
                 table.insert(windows, win)
@@ -206,6 +215,19 @@ local function clearSwitcherPrefetch(sw)
     if not sw.selected then
         sw.windows = nil
     end
+end
+
+local function getActiveSwitcherScreenFrame()
+    local win = hs.window.focusedWindow()
+    local screen = win and win:screen() or hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
+    return screen:frame()
+end
+
+--- 将 switcher 面板定位到当前激活屏幕。
+--- @param sw hs.window.switcher
+local function setSwitcherScreenFrame(sw)
+    sw.drawings.screenFrame = getActiveSwitcherScreenFrame()
+    sw.drawings.lastn = -1
 end
 
 --- 收起 switcher 面板，但不聚焦当前选中窗口。
@@ -266,7 +288,7 @@ local function adjustSwitcherLayout(sw)
     local titleHeight = ui.showTitles and ui.titleHeight or 0
     local titleGap = ui.showTitles and switcherTitleGap or 0
     local hPad = switcherPanelPadding
-    local screenFrame = drawings.screenFrame or hs.screen.mainScreen():frame()
+    local screenFrame = drawings.screenFrame or getActiveSwitcherScreenFrame()
     local bgH = switcherTopPadding + titleHeight + titleGap + size + switcherBottomPadding
     local bgW = hPad + (size + hPad) * nwindows
     local bgframe = hs.geometry(0, 0, bgW, bgH):setcenter(screenFrame.center)
@@ -354,6 +376,7 @@ end
 --- @return function prevFn
 local function makeSwitcherStepFns(sw, buildWindowsFn, getTitleFn)
     local function step(direction)
+        setSwitcherScreenFrame(sw)
         if buildWindowsFn then
             sw.windows = buildWindowsFn()
         end
@@ -426,10 +449,16 @@ local function switchSelectedAppWindow(direction)
     local pid = getSelectedCrossAppPid()
     if pid then
         switcherSelectedAppPid = pid
+        switcherUsingSelectedApp = true
         dismissSwitcherPanel(crossAppWindowSwitcher)
+    elseif not switcher.selected then
+        switcherSelectedAppPid = nil
+        switcherUsingSelectedApp = false
     end
-    if switcherSelectedAppPid then
+    if switcherUsingSelectedApp and switcherSelectedAppPid then
         switcher.windows = buildWindowsForAppPid(switcherSelectedAppPid)
+    else
+        switcherSelectedAppPid = nil
     end
     if direction > 0 then
         switchToNextWindow()
@@ -445,6 +474,7 @@ local switcherPrefetchTap = hs.eventtap.new({ hs.eventtap.event.types.flagsChang
         prefetchSwitcher(crossAppWindowSwitcher, refreshCrossAppSwitcherWindows)
     elseif not altDown and switcherModifierPrefetch.alt then
         switcherSelectedAppPid = nil
+        switcherUsingSelectedApp = false
         clearSwitcherPrefetch(switcher)
         clearSwitcherPrefetch(crossAppWindowSwitcher)
     end
