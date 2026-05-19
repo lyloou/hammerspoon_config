@@ -109,6 +109,8 @@ local switcherTopPadding = 2
 local switcherBottomPadding = 4
 local switcherHighlightPad = 4
 local switcherModifierPrefetch = { alt = false }
+local switcherSelectedAppPid = nil
+local crossAppWindowSwitcherFilter = nil
 
 --- 获取窗口缩略图（带本地缓存，避免重复截图）。
 --- @param windowId number|nil
@@ -162,6 +164,23 @@ local function buildCrossAppSwitcherWindows(wf)
     return windows
 end
 
+--- 返回指定应用在当前 Space 的可见窗口。
+--- @param pid number|nil
+--- @return hs.window[]
+local function buildWindowsForAppPid(pid)
+    local windows = {}
+    if not pid then
+        return windows
+    end
+    for _, win in ipairs(crossAppWindowSwitcherFilter:getWindows(hs.window.filter.sortByFocusedLast)) do
+        local app = win:application()
+        if app and app:pid() == pid then
+            table.insert(windows, win)
+        end
+    end
+    return windows
+end
+
 --- 预取 switcher 窗口列表与缩略图。
 --- @param sw hs.window.switcher
 --- @param buildWindowsFn function|nil
@@ -186,6 +205,49 @@ end
 local function clearSwitcherPrefetch(sw)
     if not sw.selected then
         sw.windows = nil
+    end
+end
+
+--- 收起 switcher 面板，但不聚焦当前选中窗口。
+--- @param sw hs.window.switcher
+local function dismissSwitcherPanel(sw)
+    local windows, drawings, ui = sw.windows, sw.drawings, sw.ui
+    sw.windows = nil
+    sw.selected = nil
+    if sw.modsTimer then
+        sw.modsTimer:stop()
+        sw.modsTimer = nil
+    end
+    if sw.drawDelayed and sw.drawDelayed:running() then
+        sw.drawDelayed:stop()
+    end
+    if not windows or not drawings then
+        return
+    end
+    local haveThumbs, haveTitles = ui.showThumbnails, ui.showTitles
+    drawings.background:hide()
+    drawings.highlightRect:hide()
+    for i = 1, #windows do
+        local dr = drawings[i]
+        if dr.icon then
+            dr.icon:hide()
+        end
+        if haveThumbs and dr.thumb then
+            dr.thumb:hide()
+        end
+        if haveTitles and dr.titleRect then
+            dr.titleRect:hide()
+            dr.titleText:hide()
+        end
+    end
+    drawings.selRect:hide()
+    if ui.showSelectedThumbnail then
+        drawings.selThumb:hide()
+        drawings.selIcon:hide()
+    end
+    if ui.showSelectedTitle then
+        drawings.selTitleRect:hide()
+        drawings.selTitleText:hide()
     end
 end
 
@@ -334,7 +396,7 @@ windowSwitcherFilter:setDefaultFilter({
 switcher = hs.window.switcher.new(windowSwitcherFilter, switcherUiPrefs)
 
 -- Alt+Tab：当前 Space 跨应用切换（每应用仅最近使用的一个窗口）
-local crossAppWindowSwitcherFilter = hs.window.filter.new()
+crossAppWindowSwitcherFilter = hs.window.filter.new()
 crossAppWindowSwitcherFilter:setCurrentSpace(true)
 crossAppWindowSwitcherFilter:setDefaultFilter({
     visible = true,
@@ -352,12 +414,37 @@ local switchToNextCrossAppWindow, switchToPreviousCrossAppWindow = makeSwitcherS
     getAppSwitcherTitle
 )
 
+local function getSelectedCrossAppPid()
+    local selected = crossAppWindowSwitcher.selected
+    local windows = crossAppWindowSwitcher.windows
+    local win = selected and windows and windows[selected]
+    local app = win and win:application()
+    return app and app:pid() or nil
+end
+
+local function switchSelectedAppWindow(direction)
+    local pid = getSelectedCrossAppPid()
+    if pid then
+        switcherSelectedAppPid = pid
+        dismissSwitcherPanel(crossAppWindowSwitcher)
+    end
+    if switcherSelectedAppPid then
+        switcher.windows = buildWindowsForAppPid(switcherSelectedAppPid)
+    end
+    if direction > 0 then
+        switchToNextWindow()
+    else
+        switchToPreviousWindow()
+    end
+end
+
 local switcherPrefetchTap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
     local altDown = event:getFlags().alt
     if altDown and not switcherModifierPrefetch.alt then
         prefetchSwitcher(switcher, nil)
         prefetchSwitcher(crossAppWindowSwitcher, refreshCrossAppSwitcherWindows)
     elseif not altDown and switcherModifierPrefetch.alt then
+        switcherSelectedAppPid = nil
         clearSwitcherPrefetch(switcher)
         clearSwitcherPrefetch(crossAppWindowSwitcher)
     end
@@ -371,7 +458,11 @@ hswindowSwitcher_prev_keys = hswindowSwitcher_prev_keys or {{"alt", "shift"}, "`
 hscrossAppWindowSwitcher_keys = hscrossAppWindowSwitcher_keys or hsappSwitcher_keys or {{"alt"}, "tab"}
 hscrossAppWindowSwitcher_prev_keys = hscrossAppWindowSwitcher_prev_keys or hsappSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
 
-bindSwitcherHotkeys(hswindowSwitcher_keys, hswindowSwitcher_prev_keys, switchToNextWindow, switchToPreviousWindow, "应用内下一窗口", "应用内上一窗口")
+bindSwitcherHotkeys(hswindowSwitcher_keys, hswindowSwitcher_prev_keys, function()
+    switchSelectedAppWindow(1)
+end, function()
+    switchSelectedAppWindow(-1)
+end, "应用内下一窗口", "应用内上一窗口")
 bindSwitcherHotkeys(
     hscrossAppWindowSwitcher_keys,
     hscrossAppWindowSwitcher_prev_keys,
