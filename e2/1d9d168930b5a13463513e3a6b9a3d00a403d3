@@ -1,0 +1,16 @@
+init.lua
+  h_76a3716dbfb2d7 92-96,104-105
+private/config.lua
+  h_76a3716dbfb2d7 116-117,119-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "e21d9d168930b5a13463513e3a6b9a3d00a403d3",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
