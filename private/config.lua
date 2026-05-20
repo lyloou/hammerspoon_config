@@ -113,12 +113,12 @@ QuickText_list = {
 hswhints_keys = {"alt", "c"}
 
 -- Alt+Tab：当前 Space 跨应用切换（每应用一项，最近窗口）；Alt+Shift+Tab 反向
-hscrossAppWindowSwitcher_keys = {{"alt"}, "tab"}
-hscrossAppWindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
+-- hscrossAppWindowSwitcher_keys = {{"alt"}, "tab"}
+-- hscrossAppWindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
 
--- Alt+`：当前应用内切换窗口；Alt+Shift+` 反向
-hswindowSwitcher_keys = {{"alt"}, "`"}
-hswindowSwitcher_prev_keys = {{"alt", "shift"}, "`"}
+-- Alt+tab：当前应用内切换窗口；Alt+Shift+tab 反向
+hswindowSwitcher_keys = {{"alt"}, "tab"}
+hswindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
 
 -- 快速启动面板快捷键绑定
 hsappM_keys = {"alt", "A"}

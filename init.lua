@@ -89,11 +89,11 @@ if string.len(hswhints_keys[2]) > 0 then
     end)
 end
 
--- Alt+Tab 跨应用 / Alt+` 应用内窗口切换（快捷键在 private/config.lua 配置）
-hswindowSwitcher_keys = hswindowSwitcher_keys or {{"alt"}, "`"}
-hswindowSwitcher_prev_keys = hswindowSwitcher_prev_keys or {{"alt", "shift"}, "`"}
-hscrossAppWindowSwitcher_keys = hscrossAppWindowSwitcher_keys or hsappSwitcher_keys or {{"alt"}, "tab"}
-hscrossAppWindowSwitcher_prev_keys = hscrossAppWindowSwitcher_prev_keys or hsappSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
+--  Alt+tab 应用内窗口切换（快捷键在 private/config.lua 配置）
+hswindowSwitcher_keys = hswindowSwitcher_keys or {{"alt"}, "tab"}
+hswindowSwitcher_prev_keys = hswindowSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
+-- hscrossAppWindowSwitcher_keys = hscrossAppWindowSwitcher_keys or hsappSwitcher_keys or {{"alt"}, "tab"}
+-- hscrossAppWindowSwitcher_prev_keys = hscrossAppWindowSwitcher_prev_keys or hsappSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
 
 if not spoon.WinSwitcher then
     hs.loadSpoon("WinSwitcher")
@@ -101,8 +101,8 @@ end
 spoon.WinSwitcher:bindHotkeys({
     windowNext = hswindowSwitcher_keys,
     windowPrevious = hswindowSwitcher_prev_keys,
-    crossAppNext = hscrossAppWindowSwitcher_keys,
-    crossAppPrevious = hscrossAppWindowSwitcher_prev_keys,
+    -- crossAppNext = hscrossAppWindowSwitcher_keys,
+    -- crossAppPrevious = hscrossAppWindowSwitcher_prev_keys,
 })
 
 
