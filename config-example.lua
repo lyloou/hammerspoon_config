@@ -16,7 +16,6 @@ hspoon_list = {
     "WinHints",
     "WinSwitcher",
     "WinWin",
-    "PopupTranslateSelection",
     "DeepLTranslate"
     -- "HSaria2"
     -- "HSearch"
