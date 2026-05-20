@@ -13,7 +13,6 @@
 --指定要启用的模块
 hspoon_list = {
     "BingDaily",
-    -- "CountDown",
     "KSheet",
     "WinHints",
     "WinSwitcher",
@@ -126,9 +125,6 @@ hsappM_keys = {"alt", "A"}
 
 -- 在默认浏览器中打开 Hammerspoon 和 Spoons API 手册
 --hsman_keys = {"alt", "H"}
-
--- 倒计时快捷键绑定
--- hscountdM_keys = {"alt", "I"}
 
 -- 锁定电脑快捷键绑定
 --hslock_keys = {"alt", "L"}

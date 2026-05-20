@@ -58,7 +58,6 @@ hs.loadSpoon("ModalMgr")
 if not hspoon_list then
     hspoon_list = {
         "KSheet", -- 快捷键
-        "CountDown", -- 倒计时
         "WinWin", -- 窗口管理
         "VolumeScroll", -- 鼠标滚轮调节音量
         -- "PopupTranslateSelection", -- 翻译选中文本
@@ -187,45 +186,6 @@ if string.len(hsman_keys[2]) > 0 then
         hs.doc.hsdocs.moduleEntitiesInSidebar(true)
         hs.doc.hsdocs.help()
     end)
-end
-
-----------------------------------------------------------------------------------------------------
--- countdownM 倒计时配置
-----------------------------------------------------------------------------------------------------
-if spoon.CountDown then
-    spoon.ModalMgr:new("countdownM")
-    local cmodal = spoon.ModalMgr.modal_list["countdownM"]
-    cmodal:bind('', 'escape', '退出面板', function() spoon.ModalMgr:deactivate({"countdownM"}) end)
-    cmodal:bind('', 'Q', '退出面板', function() spoon.ModalMgr:deactivate({"countdownM"}) end)
-    --cmodal:bind('', 'tab', 'Toggle Cheatsheet', function() spoon.ModalMgr:toggleCheatsheet() end)
-    cmodal:bind('', '0', '1 分钟', function()
-        spoon.CountDown:startFor(1)
-        spoon.ModalMgr:deactivate({"countdownM"})
-    end)
-    for i = 1, 9 do
-        cmodal:bind('', tostring(i), string.format("%s 分钟", 10 * i), function()
-            spoon.CountDown:startFor(10 * i)
-            spoon.ModalMgr:deactivate({"countdownM"})
-        end)
-    end
-    cmodal:bind('', 'return', '25 分钟 ', function()
-        spoon.CountDown:startFor(25)
-        spoon.ModalMgr:deactivate({"countdownM"})
-    end)
-    cmodal:bind('', 'space', '暂停和恢复倒计时', function()
-        spoon.CountDown:pauseOrResume()
-        spoon.ModalMgr:deactivate({"countdownM"})
-    end)
-
-    -- 定义打开倒计时面板快捷键
-    hscountdM_keys = hscountdM_keys or {"alt", "I"}
-    if string.len(hscountdM_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hscountdM_keys[1], hscountdM_keys[2], "进入倒计时面板", function()
-            spoon.ModalMgr:deactivateAll()
-            -- 显示倒计时面板
-            spoon.ModalMgr:activate({"countdownM"}, "#FF6347", true)
-        end)
-    end
 end
 
 ----------------------------------------------------------------------------------------------------
