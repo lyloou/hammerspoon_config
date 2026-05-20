@@ -59,8 +59,6 @@ if not hspoon_list then
     hspoon_list = {
         "KSheet", -- 快捷键
         "WinWin", -- 窗口管理
-        "SpeedMenu", -- 菜单栏显示网速
-        "MountedVolumes" -- 显示已安装卷的饼图
     }
 end
 
