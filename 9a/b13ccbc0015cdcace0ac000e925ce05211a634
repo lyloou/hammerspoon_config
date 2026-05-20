@@ -1,0 +1,24 @@
+init.lua
+  s_8856a4034b4647::t_d812737e7d0d45 63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "9ab13ccbc0015cdcace0ac000e925ce05211a634",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_8856a4034b4647": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e4559-aaa5-7892-92b0-07fb89cb8cd0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
