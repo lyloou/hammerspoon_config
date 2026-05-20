@@ -63,7 +63,6 @@ if not hspoon_list then
         -- "PopupTranslateSelection", -- 翻译选中文本
         "SpeedMenu", -- 菜单栏显示网速
         "MountedVolumes", -- 显示已安装卷的饼图
-        "HeadphoneAutoPause", -- 断开耳机自动暂停播放
         "HSearch"
     }
 end
