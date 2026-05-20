@@ -13,7 +13,6 @@
 --指定要启用的模块
 hspoon_list = {
     "BingDaily",
-    "ClipboardTool",
     -- "CountDown",
     "KSheet",
     "WinHints",

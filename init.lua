@@ -74,14 +74,6 @@ for _, v in pairs(hspoon_list) do
     hs.loadSpoon(v)
 end
 
-if spoon.ClipboardTool then
-    spoon.ClipboardTool:start()
-    hsclipboard_keys = hsclipboard_keys or {{"alt"}, "T"}
-    spoon.ClipboardTool:bindHotkeys({
-        toggle_clipboard = hsclipboard_keys,
-    })
-end
-
 ----------------------------------------------------------------------------------------------------
 -- 定义各种模式快捷键绑定
 ----------------------------------------------------------------------------------------------------
