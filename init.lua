@@ -60,8 +60,7 @@ if not hspoon_list then
         "KSheet", -- 快捷键
         "WinWin", -- 窗口管理
         "SpeedMenu", -- 菜单栏显示网速
-        "MountedVolumes", -- 显示已安装卷的饼图
-        "HSearch"
+        "MountedVolumes" -- 显示已安装卷的饼图
     }
 end
 
@@ -305,18 +304,6 @@ if string.len(hstype_keys[2]) > 0 then
             if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
         end
     end)
-end
-
-
-
-----------------------------------------------------------------------------------------------------
--- Hammerspoon 搜索
-----------------------------------------------------------------------------------------------------
-if spoon.HSearch then
-    hsearch_keys = hsearch_keys or {"alt", "G"}
-    if string.len(hsearch_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsearch_keys[1], hsearch_keys[2], '启动 Hammerspoon 搜索', function() spoon.HSearch:toggleShow() end)
-    end
 end
 
 

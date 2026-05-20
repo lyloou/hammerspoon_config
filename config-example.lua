@@ -18,7 +18,6 @@ hspoon_list = {
     "WinWin",
     "DeepLTranslate"
     -- "HSaria2"
-    -- "HSearch"
     --"SpeedMenu",
     -- "MountedVolumes",
 }
@@ -84,9 +83,6 @@ hsconsole_keys = {"alt", "Z"}
 
 -- 显示 MountedVolumes
 hstype_keys = {"alt", "M"}
-
--- 显示搜索
-hsearch_keys = {"alt", "G"}
 
 ----------------------------------------------------------------------------------------------------
 --------------------------------- hammerspoon 快捷键绑定配置  -----------------------------------------

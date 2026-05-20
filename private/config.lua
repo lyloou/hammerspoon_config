@@ -20,7 +20,6 @@ hspoon_list = {
     "QuickText",
     -- "DeepLTranslate",
     -- "HSaria2",
-    -- "HSearch",
     -- "SpeedMenu",
     -- "MountedVolumes",
 }
@@ -140,9 +139,6 @@ hscheats_keys = {"alt", "S"}
 
 -- 显示 MountedVolumes
 -- hstype_keys = {"alt", "M"}
-
--- 显示搜索
--- hsearch_keys = {"alt", "Gq"}
 
 ----------------------------------------------------------------------------------------------------
 --------------------------------- hammerspoon 快捷键绑定配置  -----------------------------------------
