@@ -67,6 +67,14 @@ for _, v in pairs(hspoon_list) do
     hs.loadSpoon(v)
 end
 
+if spoon.BrightnessControl then
+    hsbrightness_keys = hsbrightness_keys or {
+        zero = {{"ctrl", "shift"}, "f1"},
+        normal = {{"ctrl", "shift"}, "f2"},
+    }
+    spoon.BrightnessControl:bindHotkeys(hsbrightness_keys)
+end
+
 ----------------------------------------------------------------------------------------------------
 -- 定义各种模式快捷键绑定
 ----------------------------------------------------------------------------------------------------
