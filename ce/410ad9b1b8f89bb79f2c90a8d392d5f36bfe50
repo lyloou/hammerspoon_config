@@ -1,0 +1,29 @@
+init.lua
+  s_8856a4034b4647::t_8c27145634aed2 70-77
+private/config.lua
+  s_8856a4034b4647::t_836bc3ccd5c564 21,151-154
+Spoons/BrightnessControl.spoon/init.lua
+  s_8856a4034b4647::t_481d39ea41b9bd 1-18,26-58,60-72
+  s_8856a4034b4647::t_68376114fb66fc 19-25,59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "ce410ad9b1b8f89bb79f2c90a8d392d5f36bfe50",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_8856a4034b4647": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e4559-aaa5-7892-92b0-07fb89cb8cd0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
