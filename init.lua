@@ -80,32 +80,32 @@ end
 ----------------------------------------------------------------------------------------------------
 -- 定义 windowHints 快捷键
 ----------------------------------------------------------------------------------------------------
-hswhints_keys = hswhints_keys or {"alt", "c"}
-if string.len(hswhints_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
-        spoon.ModalMgr:deactivateAll()
-        if not spoon.WinHints then
-            hs.loadSpoon("WinHints")
-        end
-        spoon.WinHints:show()
-    end)
-end
+-- hswhints_keys = hswhints_keys or {"alt", "c"}
+-- if string.len(hswhints_keys[2]) > 0 then
+--     spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'WindowHints 快速切换应用', function()
+--         spoon.ModalMgr:deactivateAll()
+--         if not spoon.WinHints then
+--             hs.loadSpoon("WinHints")
+--         end
+--         spoon.WinHints:show()
+--     end)
+-- end
 
 --  Alt+tab 应用内窗口切换（快捷键在 private/config.lua 配置）
-hswindowSwitcher_keys = hswindowSwitcher_keys or {{"alt"}, "tab"}
-hswindowSwitcher_prev_keys = hswindowSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
+-- hswindowSwitcher_keys = hswindowSwitcher_keys or {{"alt"}, "tab"}
+-- hswindowSwitcher_prev_keys = hswindowSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
 -- hscrossAppWindowSwitcher_keys = hscrossAppWindowSwitcher_keys or hsappSwitcher_keys or {{"alt"}, "tab"}
 -- hscrossAppWindowSwitcher_prev_keys = hscrossAppWindowSwitcher_prev_keys or hsappSwitcher_prev_keys or {{"alt", "shift"}, "tab"}
 
-if not spoon.WinSwitcher then
-    hs.loadSpoon("WinSwitcher")
-end
-spoon.WinSwitcher:bindHotkeys({
-    windowNext = hswindowSwitcher_keys,
-    windowPrevious = hswindowSwitcher_prev_keys,
-    -- crossAppNext = hscrossAppWindowSwitcher_keys,
-    -- crossAppPrevious = hscrossAppWindowSwitcher_prev_keys,
-})
+-- if not spoon.WinSwitcher then
+--     hs.loadSpoon("WinSwitcher")
+-- end
+-- spoon.WinSwitcher:bindHotkeys({
+--     windowNext = hswindowSwitcher_keys,
+--     windowPrevious = hswindowSwitcher_prev_keys,
+--     -- crossAppNext = hscrossAppWindowSwitcher_keys,
+--     -- crossAppPrevious = hscrossAppWindowSwitcher_prev_keys,
+-- })
 
 
 ----------------------------------------------------------------------------------------------------

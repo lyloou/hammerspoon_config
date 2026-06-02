@@ -14,8 +14,8 @@
 hspoon_list = {
     "BingDaily",
     "KSheet",
-    "WinHints",
-    "WinSwitcher",
+    -- "WinHints",
+    -- "WinSwitcher",
     "WinWin",
     "QuickText",
     "BrightnessControl",
@@ -36,7 +36,8 @@ hsapp_list = {
 
     {key = 'a', name = 'Notes'},
     {key = 'b', name = 'Typora'},
-    {key = 'c', id = 'com.openai.codex'},
+    -- {key = 'c', id = 'com.openai.codex'},
+    {key = 'c', id = 'com.anthropic.claudefordesktop'},
     -- {key = 'c', id = 'com.openai.atlas'},
     -- {key = 'c', id = 'com.google.Chrome'},
     {key = 'e', id = 'md.obsidian'},
@@ -53,7 +54,8 @@ hsapp_list = {
     {key = 'v', id = 'com.apple.ActivityMonitor'},
     {key = 'w', id = 'net.cozic.joplin-desktop'},
     -- {key = 'm', id = 'com.netease.163music'},
-    {key = 'n', id = 'com.navicat.NavicatPremium'},
+    -- {key = 'n', id = 'com.navicat.NavicatPremium'},
+    {key = 'n', id = 'com.dameng.sxypt'},
     {key = 'x', id = 'com.anthropic.claudefordesktop'},
     {key = 'y', id = 'com.apple.systempreferences'},
     -- {key = 'z', id = 'com.github.wez.wezterm'}
@@ -103,15 +105,15 @@ QuickText_list = {
 ---------------------------------------- 模式快捷键绑定  ----------------------------------------------
 
 -- 窗口提示键绑定，快速切换到你想要的窗口上
-hswhints_keys = {"alt", "c"}
+-- hswhints_keys = {"alt", "c"}
 
 -- Alt+Tab：当前 Space 跨应用切换（每应用一项，最近窗口）；Alt+Shift+Tab 反向
 -- hscrossAppWindowSwitcher_keys = {{"alt"}, "tab"}
 -- hscrossAppWindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
 
 -- Alt+tab：当前应用内切换窗口；Alt+Shift+tab 反向
-hswindowSwitcher_keys = {{"alt"}, "tab"}
-hswindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
+-- hswindowSwitcher_keys = {{"alt"}, "tab"}
+-- hswindowSwitcher_prev_keys = {{"alt", "shift"}, "tab"}
 
 -- 快速启动面板快捷键绑定
 hsappM_keys = {"alt", "A"}
