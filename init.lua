@@ -20,6 +20,30 @@ end
 
 local config = loadConfig()
 local hotkeys = config.hotkeys or {}
+local reloadNoticeKey = "hammerspoon.reloadNotice"
+local supervisorEnabled = false
+
+if hs.settings.get(reloadNoticeKey) then
+    hs.settings.clear(reloadNoticeKey)
+    hs.alert.show("配置已重新加载")
+end
+
+local function reloadConfig()
+    hs.settings.set(reloadNoticeKey, true)
+    hs.reload()
+end
+
+local function toggleSupervisor()
+    if supervisorEnabled then
+        spoon.ModalMgr.supervisor:exit()
+        supervisorEnabled = false
+        hs.alert.show("快捷键已停用")
+    else
+        spoon.ModalMgr.supervisor:enter()
+        supervisorEnabled = true
+        hs.alert.show("快捷键已启用")
+    end
+end
 
 local function hotkey(name, fallback)
     return hotkeys[name] == nil and fallback or hotkeys[name]
@@ -35,17 +59,18 @@ local function bindSupervisor(keys, label, fn)
     end
 end
 
-local supervisorKeys = hotkey("supervisor", {{"cmd", "shift", "ctrl"}, "Q"})
+local supervisorKeys = hotkey("supervisor", {{"cmd", "shift", "ctrl"}, "P"})
 local helpKeys = hotkey("help", {{"alt", "shift"}, "/"})
 hsupervisor_keys = supervisorKeys
 hshelp_keys = helpKeys
 
 local reloadKeys = hotkey("reload", {{"cmd", "shift", "ctrl"}, "R"})
 if hasHotkey(reloadKeys) then
-    hs.hotkey.bind(reloadKeys[1], reloadKeys[2], "重新加载配置", function() hs.reload() end)
+    hs.hotkey.bind(reloadKeys[1], reloadKeys[2], "重新加载配置", reloadConfig)
 end
 
 hs.loadSpoon("ModalMgr")
+hs.hotkey.bind(supervisorKeys[1], supervisorKeys[2], "切换全部快捷键", toggleSupervisor)
 
 for _, name in ipairs(config.spoons or {"KSheet", "WinWin"}) do
     hs.loadSpoon(name)
@@ -59,6 +84,9 @@ if spoon.BrightnessControl then
 end
 
 local actionHandlers = {
+    toggleSupervisor = function()
+        toggleSupervisor()
+    end,
     openConsole = function()
         hs.toggleConsole()
     end,

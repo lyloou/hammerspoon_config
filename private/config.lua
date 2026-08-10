@@ -31,6 +31,7 @@ return {
     },
 
     actions = {
+        {id = "toggleSupervisor", key = "p", label = "切换全部快捷键", type = "function", name = "toggleSupervisor"},
         {id = "openConsole", key = "z", label = "打开 Hammerspoon 控制台", type = "function", name = "openConsole"},
         {id = "lockScreen", key = "l", label = "锁定屏幕", type = "function", name = "lockScreen"},
         {id = "insertCurrentTime", key = "t", label = "插入当前时间", type = "function", name = "insertCurrentTime"},
@@ -54,7 +55,7 @@ return {
     },
 
     hotkeys = {
-        supervisor = {{"cmd", "shift", "ctrl"}, "Q"},
+        supervisor = {{"cmd", "shift", "ctrl"}, "P"},
         reload = {{"cmd", "shift", "ctrl"}, "R"},
         help = {{"alt", "shift"}, "/"},
         appModal = {"alt", "A"},

@@ -24,7 +24,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 模态使用“前缀键 + 模态内按键”的两级结构。模态均可用 `Esc` 或 `Q` 退出。
 
-`Cmd+Shift+Ctrl+Q` 暂停 supervisor 中的全部快捷键；`Cmd+Shift+Ctrl+R` 重载配置。
+`Cmd+Shift+Ctrl+P` 切换 supervisor 中的全部快捷键；`Cmd+Shift+Ctrl+R` 重载配置。
 
 ### 应用启动
 
@@ -36,6 +36,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 | 按键 | 动作 |
 |---|---|
+| `P` | 切换全部快捷键 |
 | `Z` | 打开 Hammerspoon Console |
 | `L` | 锁定屏幕 |
 | `T` | 插入当前时间 |
