@@ -103,6 +103,21 @@ QuickText_list = {
     },
 }
 
+-- 通用动作配置：由 Alt+Q 进入动作模式后按对应字母触发
+hsaction_list = {
+    {key = "z", label = "插入当前时间", type = "function", action = function()
+        hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S"))
+    end},
+    {key = "x", label = "执行计划和我确认", type = "text", text = "执行计划和我确认"},
+    {key = "c", label = "执行", type = "text", text = "执行"},
+    {
+        key = "v",
+        label = "打开工具箱",
+        type = "execute",
+        command = "open -a /Applications/SimpleMind\\ Pro.app ~/w/coocaa/coocaa-project/A-工具箱/A-工具箱.smmx",
+    },
+}
+
 ----------------------------------------------------------------------------------------------------
 ---------------------------------------- 模式快捷键绑定  ----------------------------------------------
 

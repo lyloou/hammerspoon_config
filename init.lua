@@ -166,6 +166,50 @@ for _, v in ipairs(hsapp_list) do
     end
 end
 
+----------------------------------------------------------------------------------------------------
+-- 通用动作模式
+----------------------------------------------------------------------------------------------------
+spoon.ModalMgr:new("quickActionM")
+local quickActionModal = spoon.ModalMgr.modal_list["quickActionM"]
+quickActionModal:bind('', 'escape', '退出', function()
+    spoon.ModalMgr:deactivate({"quickActionM"})
+end)
+quickActionModal:bind('', 'Q', '退出', function()
+    spoon.ModalMgr:deactivate({"quickActionM"})
+end)
+
+local function runAction(action)
+    if action.type == "function" then
+        action.action()
+    elseif action.type == "text" then
+        hs.eventtap.keyStrokes(action.text)
+    elseif action.type == "execute" then
+        hs.execute(action.command)
+    end
+    spoon.ModalMgr:deactivate({"quickActionM"})
+end
+
+for _, action in ipairs(hsaction_list or {}) do
+    if action.key and action.type then
+        quickActionModal:bind('', action.key, action.label or action.type, function()
+            runAction(action)
+        end)
+    end
+end
+
+hsquickActionM_keys = hsquickActionM_keys or {"alt", "Q"}
+if string.len(hsquickActionM_keys[2]) > 0 then
+    spoon.ModalMgr.supervisor:bind(
+        hsquickActionM_keys[1],
+        hsquickActionM_keys[2],
+        "进入通用动作模式",
+        function()
+            spoon.ModalMgr:deactivateAll()
+            spoon.ModalMgr:activate({"quickActionM"}, "#2390FF", true)
+        end
+    )
+end
+
 
 ----------------------------------------------------------------------------------------------------
 -- 绑定快捷键
@@ -410,5 +454,3 @@ spoon.ModalMgr.supervisor:enter()
 hs.hotkey.bind({"shift", "option"}, "z", function() hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S")) end)
 hs.hotkey.bind({"shift", "option"}, "x", function() hs.eventtap.keyStrokes("执行计划和我确认") end)
 hs.hotkey.bind({"shift", "option"}, "c", function() hs.eventtap.keyStrokes("执行") end)
-
-hs.hotkey.bind({"shift", "option"}, "v", function() hs.execute("open -a /Applications/SimpleMind\\ Pro.app ~/w/desktop-media/A-工具箱/A-工具箱.smmx") end)
