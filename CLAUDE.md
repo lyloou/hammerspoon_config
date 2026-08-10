@@ -8,19 +8,17 @@ A Hammerspoon macOS automation config written in Lua. Hammerspoon exposes macOS 
 
 ## Reloading the config
 
-After editing any `.lua` file, reload with **Cmd+Shift+Ctrl+R** (or via the Hammerspoon menu bar icon → Reload Config). Changes are not live until reloaded. Errors appear in the Hammerspoon console (Alt+Z or menu bar → Open Console).
+After editing any `.lua` file, reload with **Cmd+Shift+Ctrl+R** (or via the Hammerspoon menu bar icon → Reload Config). Changes are not live until reloaded. Errors appear in the Hammerspoon console (Option+Q, then Z, or menu bar → Open Console).
 
 ## Architecture
 
-**`init.lua`** — main entry point. Loads `ModalMgr` first, then iterates `hspoon_list` to load each Spoon. Then binds all modal hotkeys. Variables like `hspoon_list`, `hsapp_list`, and `hs*_keys` have defaults in `init.lua` but are overridable.
+**`init.lua`** — main entry point. Loads the configuration table, initializes `ModalMgr` and configured Spoons, implements named function actions, then binds modals and global aliases. It owns runtime behavior only.
 
-**`private/config.lua`** — personal overrides. Loaded before hotkey binding in `init.lua`, so any variable set here takes precedence. This is where to customize which Spoons load, which apps get launch keys, and what the mode prefix keys are. `config-example.lua` is the template.
+**`private/config.lua`** — personal configuration. It returns a declarative table with enabled Spoons, app launcher entries, actions, hotkeys, brightness bindings, and global aliases. It must not call `hs.*` APIs or define executable functions.
 
 **`Spoons/`** — self-contained Hammerspoon modules (each a directory with `init.lua`). Key ones:
 - `ModalMgr` — foundation for all modal modes; `spoon.ModalMgr.supervisor` is the always-on keymap
 - `WinWin` — window move/resize operations called from the `resizeM` modal
-- `ClipShow` — clipboard panel with search/save actions
-- `CountDown` — pomodoro timer
 
 ## Modal pattern
 
@@ -30,10 +28,11 @@ Example flow for window management: `Alt+R` → enters `resizeM` modal → `H/L/
 
 ## Customization points in `private/config.lua`
 
-| Variable | Purpose |
+| Field | Purpose |
 |---|---|
-| `hspoon_list` | Which Spoons to load (array of name strings) |
-| `hsapp_list` | App launcher entries `{key, name/id}` for appM modal |
-| `hs*_keys` | Prefix key for each modal, e.g. `hsresizeM_keys = {"alt", "R"}` |
-| `hsreload_keys` | Config reload hotkey |
-| `hsupervisor_keys` | Supervisor suspend hotkey |
+| `spoons` | Spoons to load (array of name strings) |
+| `apps` | App launcher entries `{key, name/id}` for appM modal |
+| `actions` | Quick-action entries. `function` actions reference a handler name implemented in `init.lua`. |
+| `hotkeys` | Prefix and global hotkeys. Use `false` to disable an optional binding. |
+| `brightness` | BrightnessControl hotkey mapping. |
+| `globalAliases` | Optional direct aliases to configured actions. |
