@@ -185,6 +185,8 @@ local function runAction(action)
         hs.eventtap.keyStrokes(action.text)
     elseif action.type == "execute" then
         hs.execute(action.command)
+    elseif action.type == "url" then
+        hs.urlevent.openURL(action.url)
     end
     spoon.ModalMgr:deactivate({"quickActionM"})
 end

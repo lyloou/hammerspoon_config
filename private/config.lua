@@ -65,7 +65,10 @@ hsapp_list = {
 
 -- 通用动作配置：由 Alt+Q 进入动作模式后按对应字母触发
 hsaction_list = {
-    {key = "z", label = "插入当前时间", type = "function", action = function()
+    {key = "z", label = "打开 Hammerspoon 控制台", type = "function", action = function()
+        hs.toggleConsole()
+    end},
+    {key = "t", label = "插入当前时间", type = "function", action = function()
         hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S"))
     end},
     {key = "x", label = "执行计划和我确认", type = "text", text = "执行计划和我确认"},
@@ -75,6 +78,12 @@ hsaction_list = {
         label = "打开工具箱",
         type = "execute",
         command = "open -a /Applications/SimpleMind\\ Pro.app ~/w/coocaa/coocaa-project/A-工具箱/A-工具箱.smmx",
+    },
+    {
+        key = "o",
+        label = "打开 DevOps",
+        type = "url",
+        url = "http://cloud.coocaa.io/deploy/user/svc/deploy",
     },
 }
 
@@ -112,6 +121,7 @@ hscheats_keys = {"alt", "S"}
 
 -- 显示 Hammerspoon 控制台
 -- hsconsole_keys = {"alt", "Z"}
+hsconsole_keys = {"", ""}
 
 
 ----------------------------------------------------------------------------------------------------
