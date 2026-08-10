@@ -341,25 +341,6 @@ if spoon.KSheet then
     end
 end
 
--- 粘贴浏览器最前置的标题和地址
-----------------------------------------------------------------------------------------------------
-hstype_keys = hstype_keys or {"alt", "V"}
-if string.len(hstype_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hstype_keys[1], hstype_keys[2], "粘贴浏览器最前置页面标题和地址", function()
-        local safari_running = hs.application.applicationsForBundleID("com.apple.Safari")
-        local chrome_running = hs.application.applicationsForBundleID("com.google.Chrome")
-        if #safari_running > 0 then
-            local stat, data = hs.applescript('tell application "Safari" to get {URL, name} of current tab of window 1')
-            if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
-        elseif #chrome_running > 0 then
-            local stat, data = hs.applescript('tell application "Google Chrome" to get {URL, title} of active tab of window 1')
-            if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
-        end
-    end)
-end
-
-
-
 ----------------------------------------------------------------------------------------------------
 -- 快捷显示 Hammerspoon 控制台
 ----------------------------------------------------------------------------------------------------

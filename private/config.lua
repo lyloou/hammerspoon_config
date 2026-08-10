@@ -75,6 +75,23 @@ hsaction_list = {
     {key = "c", label = "执行", type = "text", text = "执行"},
     {
         key = "v",
+        label = "粘贴浏览器 Markdown 链接",
+        type = "function",
+        action = function()
+            local app = hs.application.frontmostApplication()
+            local bundleID = app and app:bundleID()
+            local script
+            if bundleID == "com.google.Chrome" then
+                script = 'tell application "Google Chrome" to get {URL, title} of active tab of window 1'
+            end
+            if script then
+                local stat, data = hs.applescript(script)
+                if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
+            end
+        end,
+    },
+    {
+        key = "m",
         label = "打开工具箱",
         type = "execute",
         command = "open -a /Applications/SimpleMind\\ Pro.app ~/w/coocaa/coocaa-project/A-工具箱/A-工具箱.smmx",
