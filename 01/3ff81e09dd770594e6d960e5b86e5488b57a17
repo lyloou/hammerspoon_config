@@ -1,0 +1,22 @@
+.gitignore
+  h_76a3716dbfb2d7 2
+AGENTS.md
+  h_76a3716dbfb2d7 33
+README.md
+  h_76a3716dbfb2d7 27,39
+init.lua
+  h_76a3716dbfb2d7 23-46,62,69,73,87-89
+private/config.lua
+  h_76a3716dbfb2d7 34,58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "013ff81e09dd770594e6d960e5b86e5488b57a17",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
