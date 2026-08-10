@@ -28,7 +28,6 @@ hspoon_list = {
 hsapp_list = {
     {key = '1', name = 'Cursor'},
     {key = '2', id = 'com.google.Chrome'},
-    -- {key = '2', id = 'com.openai.atlas'},
     {key = '3', name = 'IntelliJ IDEA'},
     {key = '4', id = 'com.kingsoft.wpsoffice.mac'},
     {key = '5', name = 'WindTerm'},
@@ -67,6 +66,9 @@ hsapp_list = {
 hsaction_list = {
     {key = "z", label = "打开 Hammerspoon 控制台", type = "function", action = function()
         hs.toggleConsole()
+    end},
+    {key = "l", label = "锁定屏幕", type = "function", action = function()
+        hs.caffeinate.lockScreen()
     end},
     {key = "t", label = "插入当前时间", type = "function", action = function()
         hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S"))
@@ -138,7 +140,6 @@ hscheats_keys = {"alt", "S"}
 
 -- 显示 Hammerspoon 控制台
 -- hsconsole_keys = {"alt", "Z"}
-hsconsole_keys = {"", ""}
 
 
 ----------------------------------------------------------------------------------------------------
