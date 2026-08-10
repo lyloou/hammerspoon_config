@@ -30,16 +30,17 @@ function obj:init()
     obj.modal_tray[1] = {
         type = "circle",
         action = "fill",
-        fillColor = {hex = "#FFFFFF", alpha = 0.7},
+        fillColor = {hex = "#FFFFFF", alpha = hammerspoon_opacity or 0.75},
     }
     obj.which_key = hs.canvas.new({x = 0, y = 0, w = 0, h = 0})
     obj.which_key:level(hs.canvas.windowLevels.tornOffMenu)
     obj.darkTheme = hammerspoon_theme ~= "light"
+    obj.opacity = hammerspoon_opacity or 0.75
     obj.which_key[1] = {
         type = "rectangle",
         action = "fill",
-        fillColor = {hex = obj.darkTheme and "#121820" or "#F4F6F8", alpha = 0.98},
-        strokeColor = {hex = obj.darkTheme and "#33414F" or "#CDD5DC", alpha = 1},
+        fillColor = {hex = obj.darkTheme and "#121820" or "#F4F6F8", alpha = obj.opacity},
+        strokeColor = {hex = obj.darkTheme and "#33414F" or "#CDD5DC", alpha = obj.opacity},
         strokeWidth = 1,
         roundedRectRadii = {xRadius = 12, yRadius = 12},
     }
@@ -98,7 +99,7 @@ function obj:toggleCheatsheet(iterList, force)
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
                     textSize = 16,
-                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = 1},
+                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = obj.opacity},
                     textAlignment = "left",
                     frame = {
                         x = tostring(40 / (cres.w / 5 * 3)),
@@ -113,7 +114,7 @@ function obj:toggleCheatsheet(iterList, force)
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
                     textSize = 16,
-                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = 1},
+                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = obj.opacity},
                     textAlignment = "right",
                     frame = {
                         x = "50%",
@@ -152,7 +153,7 @@ function obj:activate(idList, trayColor, showKeys)
             w = 20,
             h = 20
         })
-        obj.modal_tray[1].fillColor = {hex = trayColor, alpha = 0.7}
+        obj.modal_tray[1].fillColor = {hex = trayColor, alpha = obj.opacity}
         obj.modal_tray:show()
     end
     if showKeys then

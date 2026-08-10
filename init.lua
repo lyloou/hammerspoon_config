@@ -21,6 +21,8 @@ end
 local config = loadConfig()
 local hotkeys = config.hotkeys or {}
 hammerspoon_theme = config.theme == "light" and "light" or "dark"
+hammerspoon_opacity = tonumber(config.opacity) or 0.75
+hammerspoon_opacity = math.min(math.max(hammerspoon_opacity, 0), 1)
 local reloadNoticeKey = "hammerspoon.reloadNotice"
 local supervisorEnabled = false
 
@@ -87,6 +89,14 @@ end
 local actionHandlers = {
     toggleSupervisor = function()
         toggleSupervisor()
+    end,
+    showCheatsheet = function()
+        if not spoon.KSheet then
+            return
+        end
+        spoon.KSheet:show()
+        spoon.ModalMgr:deactivateAll()
+        spoon.ModalMgr:activate({"cheatsheetM"})
     end,
     openConsole = function()
         hs.toggleConsole()
@@ -272,11 +282,6 @@ if spoon.KSheet then
         spoon.ModalMgr:deactivate({"cheatsheetM"})
     end)
 
-    bindSupervisor(hotkey("cheatsheetModal", {"alt", "S"}), "显示应用快捷键", function()
-        spoon.KSheet:show()
-        spoon.ModalMgr:deactivateAll()
-        spoon.ModalMgr:activate({"cheatsheetM"})
-    end)
 end
 
 bindSupervisor(hotkey("console", false), "打开 Hammerspoon 控制台", actionHandlers.openConsole)

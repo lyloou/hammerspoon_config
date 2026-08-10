@@ -26,8 +26,12 @@ obj.commandEnum = {
 
 function obj:init()
     self.sheetView = hs.webview.new({x=0, y=0, w=0, h=0})
+    self.renderToken = 0
+    self.htmlCache = {}
     self.sheetView:windowTitle("CheatSheets")
     self.sheetView:windowStyle("utility")
+    self.sheetView:transparent(true)
+    self.sheetView:alpha(hammerspoon_opacity or 0.75)
     self.sheetView:allowGestures(true)
     self.sheetView:allowNewWindows(false)
     self.sheetView:level(hs.drawing.windowLevels.modalPanel)
@@ -63,7 +67,6 @@ local function processMenuItems(menustru)
 end
 
 local function generateHtml(application)
-    local app_title = application:title()
     local menuitems_tree = application:getMenuItems()
     local allmenuitems = processMenuItems(menuitems_tree)
 
@@ -76,9 +79,9 @@ local function generateHtml(application)
             *{margin:0; padding:0;}
             :root{
               color-scheme: dark;
-              --bg:#101419;
-              --surface:#171d24;
-              --line:#2a3540;
+              --bg:#121820;
+              --surface:#121820;
+              --line:#33414f;
               --text:#e8eef2;
               --muted:#8d9ba6;
               --accent:#67d8d1;
@@ -86,8 +89,8 @@ local function generateHtml(application)
             body.light{
               color-scheme: light;
               --bg:#f4f6f8;
-              --surface:#ffffff;
-              --line:#d8e0e6;
+              --surface:#f4f6f8;
+              --line:#cdd5dc;
               --text:#17212b;
               --muted:#5d6b76;
               --accent:#147a78;
@@ -117,48 +120,25 @@ local function generateHtml(application)
               letter-spacing:0.04em;
             }
             ul, li{list-style: inside none; padding: 0 0 5px;}
-            footer{
-              position: fixed;
-              left: 0;
-              right: 0;
-              height: 48px;
-              background-color:var(--surface);
-            }
-            header{
-              position: fixed;
-              top: 0;
-              left: 0;
-              right: 0;
-              height:48px;
-              background-color:var(--surface);
-              z-index:99;
-            }
-            footer{ bottom: 0; }
-            header hr,
-            footer hr {
-              border: 0;
-              height: 0;
-              border-top: 1px solid var(--line);
-              border-bottom: 1px solid rgba(103, 216, 209, 0.12);
-            }
-            .title{
-                padding: 15px;
-                font-family:"Courier-Bold", monospace;
-            }
-            li.title{padding: 0  10px 15px}
+            li.title{padding: 0 10px 15px}
             .content{
-              padding: 0 0 15px;
+              padding: 0;
               font-size:12px;
               overflow:hidden;
             }
             .content.maincontent{
-            position: relative;
-              height: 577px;
-              margin-top: 46px;
+              position: relative;
+              margin-top: 0;
+              display:grid;
+              grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+              gap:16px;
+              max-height:100vh;
+              overflow:auto;
             }
             .content > .col{
-              width: 23%;
-              padding:20px 0 20px 20px;
+              width:auto;
+              min-width:0;
+              padding:20px 16px;
               border-left:1px solid var(--line);
             }
 
@@ -182,41 +162,26 @@ local function generateHtml(application)
             .cmdtext{
               float: left;
               overflow: hidden;
-              width: 165px;
+              width: calc(100% - 75px);
               color:var(--text);
             }
         </style>
         </head>
           <body class="]] .. theme .. [[">
-            <header>
-              <div class="title"><strong>]] .. app_title .. [[</strong></div>
-              <hr />
-            </header>
             <div class="content maincontent">]] .. allmenuitems .. [[</div>
-            <br>
 
-          <footer>
-            <hr />
-              <div class="content" >
-                <div class="col">
-                   <a >  快捷键显示面板 </a>
-                </div>
-              </div>
-          </footer>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
-            <script type="text/javascript">
-              var elem = document.querySelector('.content');
-              var iso = new Isotope( elem, {
-                // options
-                itemSelector: '.col',
-                layoutMode: 'masonry'
-              });
-            </script>
           </body>
         </html>
         ]]
 
     return html
+end
+
+local function loadingHtml(application)
+    local theme = hammerspoon_theme == "light" and "light" or "dark"
+    local background = theme == "light" and "#F4F6F8" or "#121820"
+    local text = theme == "light" and "#147A78" or "#67D8D1"
+    return string.format([[<html><body class="%s" style="background:%s;color:%s;font-family:-apple-system,sans-serif;padding:32px">读取 %s 菜单...</body></html>]], theme, background, text, application:title())
 end
 
 --- KSheet:show()
@@ -229,14 +194,38 @@ function obj:show()
     local cscreen = hs.screen.mainScreen()
     local cres = cscreen:fullFrame()
     self.sheetView:frame({
-        x = cres.x+cres.w*0.15/2,
-        y = cres.y+cres.h*0.25/2,
-        w = cres.w*0.85,
-        h = cres.h*0.75
+        x = cres.x + cres.w / 5,
+        y = cres.y + cres.h / 5,
+        w = cres.w / 5 * 3,
+        h = cres.h / 5 * 3
     })
-    local webcontent = generateHtml(capp)
-    self.sheetView:html(webcontent)
+    self.renderToken = self.renderToken + 1
+    local token = self.renderToken
+    local cacheKey = capp:bundleID() or capp:title()
+    self.sheetView:html(self.htmlCache[cacheKey] or loadingHtml(capp))
     self.sheetView:show()
+    hs.timer.doAfter(0, function()
+        if token == self.renderToken then
+            local webcontent = self.htmlCache[cacheKey] or generateHtml(capp)
+            self.htmlCache[cacheKey] = webcontent
+            self.sheetView:html(webcontent)
+            hs.timer.doAfter(0.05, function()
+                if token ~= self.renderToken then
+                    return
+                end
+                self.sheetView:evaluateJavaScript("document.body.scrollHeight", function(height)
+                    local contentHeight = tonumber(height)
+                    if not contentHeight then
+                        return
+                    end
+                    local frame = self.sheetView:frame()
+                    local screenHeight = hs.screen.mainScreen():fullFrame().h
+                    frame.h = math.min(math.max(contentHeight + 16, 180), screenHeight * 0.75)
+                    self.sheetView:frame(frame)
+                end)
+            end)
+        end
+    end)
 end
 
 --- KSheet:hide()

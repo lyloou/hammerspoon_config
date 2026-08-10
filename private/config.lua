@@ -1,5 +1,6 @@
 return {
     theme = "dark",
+    opacity = 0.75,
 
     spoons = {
         "KSheet",
@@ -34,6 +35,7 @@ return {
 
     actions = {
         {id = "toggleSupervisor", key = "p", label = "切换全部快捷键", type = "function", name = "toggleSupervisor"},
+        {id = "showCheatsheet", key = "s", label = "显示应用快捷键", type = "function", name = "showCheatsheet"},
         {id = "openConsole", key = "z", label = "打开 Hammerspoon 控制台", type = "function", name = "openConsole"},
         {id = "lockScreen", key = "l", label = "锁定屏幕", type = "function", name = "lockScreen"},
         {id = "insertCurrentTime", key = "t", label = "插入当前时间", type = "function", name = "insertCurrentTime"},
@@ -65,7 +67,7 @@ return {
         documentation = {"alt", "cmd", "H"},
         lock = {"alt", "cmd", "L"},
         resizeModal = {"alt", "R"},
-        cheatsheetModal = {"alt", "S"},
+        cheatsheetModal = false,
         console = false,
     },
 

@@ -26,7 +26,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 `Cmd+Shift+Ctrl+P` 切换 supervisor 中的全部快捷键；`Cmd+Shift+Ctrl+R` 重载配置。
 
-界面主题在 `private/config.lua` 的 `theme` 中配置，支持 `"dark"` 和 `"light"`，默认是 `"dark"`。
+界面主题和透明度在 `private/config.lua` 中配置：`theme` 支持 `"dark"` 和 `"light"`，默认是 `"dark"`；`opacity` 范围为 `0` 到 `1`，默认是 `0.75`。
 
 ### 应用启动
 
@@ -71,7 +71,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 ### 其他
 
-- `Option+S`：显示当前应用的菜单快捷键（KSheet）
+- `Option+Q` 后按 `S`：显示当前应用的菜单快捷键（KSheet）
 - `Ctrl+Shift+F1/F2`：亮度归零 / 恢复普通亮度
 - `Alt+Cmd+H`：打开 Hammerspoon API 手册
 
