@@ -1,0 +1,24 @@
+AGENTS.md
+  h_76a3716dbfb2d7 24
+README.md
+  h_76a3716dbfb2d7 29-30
+Spoons/KSheet.spoon/init.lua
+  h_76a3716dbfb2d7 70,77-94,96-98,101-107,110,113-118,125,133,141-142,146,162,178,180,186,190
+Spoons/ModalMgr.spoon/init.lua
+  h_76a3716dbfb2d7 24,37,41-44,101,116
+init.lua
+  h_76a3716dbfb2d7 23
+private/config.lua
+  h_76a3716dbfb2d7 2-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "773f6d47ebbd2937c9f1482591eb56c15a02a821",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
