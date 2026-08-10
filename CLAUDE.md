@@ -19,7 +19,6 @@ After editing any `.lua` file, reload with **Cmd+Shift+Ctrl+R** (or via the Hamm
 **`Spoons/`** — self-contained Hammerspoon modules (each a directory with `init.lua`). Key ones:
 - `ModalMgr` — foundation for all modal modes; `spoon.ModalMgr.supervisor` is the always-on keymap
 - `WinWin` — window move/resize operations called from the `resizeM` modal
-- `QuickText` — text expansion triggered by typed abbreviations; configured via `QuickText_list` in private config
 - `ClipShow` — clipboard panel with search/save actions
 - `CountDown` — pomodoro timer
 
@@ -35,7 +34,6 @@ Example flow for window management: `Alt+R` → enters `resizeM` modal → `H/L/
 |---|---|
 | `hspoon_list` | Which Spoons to load (array of name strings) |
 | `hsapp_list` | App launcher entries `{key, name/id}` for appM modal |
-| `QuickText_list` | Text/URL/search expansions keyed by abbreviation |
 | `hs*_keys` | Prefix key for each modal, e.g. `hsresizeM_keys = {"alt", "R"}` |
 | `hsreload_keys` | Config reload hotkey |
 | `hsupervisor_keys` | Supervisor suspend hotkey |

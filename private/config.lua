@@ -17,7 +17,6 @@ hspoon_list = {
     -- "WinHints",
     -- "WinSwitcher",
     "WinWin",
-    "QuickText",
     "BrightnessControl",
 }
 
@@ -62,45 +61,6 @@ hsapp_list = {
     {key = 'y', id = 'com.apple.systempreferences'},
     -- {key = 'z', id = 'com.github.wez.wezterm'}
     {key = 'z', id = 'com.mitchellh.ghostty'}
-}
-
--- 快捷文字配置脚本
-QuickText_list = {
-    -- open url
-    ["oo1"] =
-    {
-        ["type"] = "url",
-        ["url"] = "https://www.hammerspoon.org/",
-    },
-    ["oo2"] =
-    {
-        ["type"] = "url",
-        ["url"] = "https://www.v2ex.com/",
-    },
-    ["oo3"] =
-    {
-        ["type"] = "url",
-        ["url"] = "https://github.com/",
-    },
-    -- search text
-    ["gg"] =
-    {
-        ["type"] = "search",
-        ["text"] = "https://www.google.com/search?q=",
-    },
-
-    --  expand text
-    ["t1"] =
-    {
-        ["type"] = "text",
-        ["text"] = "15057466****",
-    },
-    -- todo
-    ["todo"] =
-    {
-        ["type"] = "text",
-        ["text"] = "//TODO:",
-    },
 }
 
 -- 通用动作配置：由 Alt+Q 进入动作模式后按对应字母触发
