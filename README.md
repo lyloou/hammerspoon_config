@@ -1,116 +1,136 @@
-# [hammerspoon-config](hammerspoon-config) 
+# Hammerspoon 自动化配置
 
+这是一个面向 macOS 的 Hammerspoon 配置，提供模态快捷键、应用启动、窗口管理、应用快捷键查看和常用文本/命令动作。
 
-> 本配置基于 vim 风格，实现了窗口管理，快速启动等功能。所有模式按照指定快捷键进入，所有模式都可以用 `esc` 或 `q`退出。在进入对应模式之前只有模式快捷键生效，进入对应模式之后此模式的操作快捷键生效。
+## 安装
 
-## 安装配置与升级:
+安装 Hammerspoon：
 
-安装 hammerspoon 
-```
-brew cask install hammerspoon
-```
-
-将配置文件克隆到本地根目录。
-```
-git clone https://github.com/zuorn/hammerspoon_config ~/.hammerspoon
-```
-**重新加载配置文件即可生效**。
-
-如果提示：already exists and is not an empty directory.
-先删除目录
-
-```
-rm -rf ~/.hammerspoon
+```sh
+brew install --cask hammerspoon
 ```
 
-升级：
+将仓库放到 Hammerspoon 配置目录：
 
-```
-cd ~/.hammerspoon && git pull
-```
-
-## 功能实现：
-
-**注：所有模式按 `esc` 和 `q` 退出。**
-
-### 帮助面板
-按下快捷键 `shift` + `option` + `/` 显示帮助面板查看各个模式快捷键。再按下对应快捷键切换模式。
-
-![](http://ww1.sinaimg.cn/large/006tNc79ly1g4pzrve6gsj31c00u0k0p.jpg)
-
-
-### 窗口管理模式
-按下前缀键 `Option` + `R` 进入窗口管理模式：
-
-* 使用 `h、j、k、l` 移动为上下左右的半屏
-* 使用 ` y、u、i、o`（即 hjkl 上方按键）移动为左上/左下/右上/右下的四分之一窗口
-* 使用 `c` 居中，按下 `=、-` 进行窗口大小缩放
-* 使用 `w、s、a、d` 向上下左右移动窗口
-* 使用 `H、J、K、L` 向左/下增减窗口大小
-* 使用方向键 `上、下、左、右` 移动到相应方向上的显示器（多块显示器的话）
-* 使用 `[,]` 左三分之二屏和右三分之二屏
-* 使用 `space` 将窗口投送到另外一块屏幕（假如有两块以上显示器的话）
-* 使用 `t` 光标移动到所在窗口的中间位置
-* 使用 `tab` 显示帮助面板，查看键位图
-* 使用 `G` 左三分之二居中分屏 
-* 使用 `Z` 展示显示 
-* 使用 `V` 编程显示 
-* 使用 `t` 将光标移至所在窗口的中心位置 
-* 使用 `X` 三分之一居中分屏 
-
-
-![](http://ww4.sinaimg.cn/large/006tNc79ly1g4pz9dhogwj31c00u04aw.jpg) 
-
-注：如设置程序坞自动隐藏请修改  `/Users/zuorn/.hammerspoon/Spoons/WinWin.spoon/init.lua.bak` 为`init.lua`
-
-### 应用快速切换
-
-按下前缀键 `Option` + `tab` 显示窗口提示，按下对应应用显示的字母快速切换。
-![快速切换](https://i.loli.net/2019/07/06/5d20193818dd473100.png)
-
-
-
-
-### KSheet - 展示应用快捷键
-
-按下快捷键 `Option` + `s` 展示当前应用快捷键，按 `q` 或者 `esc` 退出。
-
-![应用快捷键](https://i.loli.net/2019/07/06/5d2019381760e52911.png)
-
-
-### 快速启动
-
-按下快捷键 `Option` + `a` 打开快速启动，按下对应字母快速打开应用。
-
-![启动器](https://i.loli.net/2019/07/06/5d2019368b6dc67355.png)
-
-
-### 顶部实时显示网速
-
-没有模式快捷键，默认开启。
-
-![网速显示](https://i.loli.net/2019/07/06/5d2019336a0b441738.jpg)
-
-## 自定义配置
-
-拷贝私有配置文件
-
-```
-cp ~/.hammerspoon/config-example.lua ~/.hammerspoon/private/config.lua
+```sh
+git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 ```
 
-按照注释编辑私有配置文件 `~/.hammerspoon/private/config.lua` 即可。
+打开 Hammerspoon 后，使用 `Cmd+Shift+Ctrl+R` 重载配置。
 
-####  可自定义范围：
+## 快捷键
 
-* 指定要启用模块
-*  找到配置文件启用模块，注释对应模块可禁止用对应功能。
-* 绑定快速启动 app 及快捷键
-* 自定义模式快捷键
-* 自定义 hammerspoon 快捷键绑定
+### 通用约定
 
+模态使用“前缀键 + 模态内按键”的两级结构。模态均可用 `Esc` 或 `Q` 退出。
 
-## 参考：
+`Cmd+Shift+Ctrl+Q` 暂停 supervisor 中的全部快捷键；`Cmd+Shift+Ctrl+R` 重载配置。
 
-* [Hammerspoon Spoons](https://www.hammerspoon.org/Spoons/)
-* [awesome-hammerspoon](https://github.com/ashfinal/awesome-hammerspoon)
+### 应用启动
+
+`Option+A` 进入应用启动模式。应用字母和对应程序在 `private/config.lua` 的 `apps` 中配置；`L` 打开 Launchpad，`D` 显示桌面。
+
+### 通用动作
+
+`Option+Q` 进入通用动作模式：
+
+| 按键 | 动作 |
+|---|---|
+| `Z` | 打开 Hammerspoon Console |
+| `L` | 锁定屏幕 |
+| `T` | 插入当前时间 |
+| `X` | 插入“执行计划和我确认” |
+| `C` | 插入“执行” |
+| `V` | 从前台 Chrome 插入当前页面的 Markdown 链接 |
+| `M` | 打开 SimpleMind 工具箱 |
+| `O` | 打开 DevOps |
+
+另外保留三个直接动作别名：
+
+- `Shift+Option+Z`：插入当前时间
+- `Shift+Option+X`：插入“执行计划和我确认”
+- `Shift+Option+C`：插入“执行”
+
+### 窗口管理
+
+`Option+R` 进入 `WinWin` 窗口管理模式：
+
+- `W/A/S/D`：按步移动窗口
+- `H/J/K/L`：左、下、上、右半屏
+- `Y/O/U/I`：左上、右上、左下、右下四分之一屏
+- `F`：全屏；`C`：居中；`G`：左三分之二屏；`X`：居中二分之一屏
+- `Z/V`：预设展示布局
+- `=` / `-`：放大 / 缩小
+- `Ctrl+H/J/K/L`：按步调整窗口尺寸
+- 方向键：移动到对应方向的屏幕；`Space`：移动到下一块屏幕
+- `B/R`：撤销 / 重做窗口操作；`T`：将鼠标移到窗口中心
+- `Tab`：显示当前模态的键位提示
+
+### 其他
+
+- `Option+S`：显示当前应用的菜单快捷键（KSheet）
+- `Ctrl+Shift+F1/F2`：亮度归零 / 恢复普通亮度
+- `Alt+Cmd+H`：打开 Hammerspoon API 手册
+
+## 光标移动（重点）
+
+这组快捷键是本配置中最常用的效率功能之一：使用 `Option` 加方向键映射，在不离开主键区的情况下移动光标。
+
+### 基本移动
+
+| 快捷键 | 作用 |
+|---|---|
+| `Option+H` | 向左移动一个字符 |
+| `Option+L` | 向右移动一个字符 |
+| `Option+I` | 向上移动一行 |
+| `Option+,` | 向下移动一行 |
+| `Option+B` | 向左移动一个单词 |
+| `Option+F` | 向右移动一个单词 |
+| `Option+Cmd+0` | 移到行首 |
+| `Option+Cmd+4` | 移到行尾 |
+| `Option+U` | 向上翻页 |
+| `Option+E` | 向上翻页 |
+| `Option+D` | 向下翻页 |
+
+### 选区扩展
+
+按住 `Shift`，即可将对应移动改为选中：
+
+- `Option+Shift+H/L`：向左 / 向右选择字符
+- `Option+Shift+I/,`：向上 / 向下选择
+- `Option+Shift+B/F`：按单词选择
+- `Option+Shift+Cmd+0/4`：选择到行首 / 行尾
+- `Ctrl+Option+Shift+H/L`：按单词向左 / 向右选择
+
+`Option+'`：前向删除。
+
+## 配置
+
+所有个人化配置位于 `private/config.lua`，文件返回一个 Lua 表：
+
+```lua
+return {
+    spoons = {"KSheet", "WinWin", "BrightnessControl"},
+    apps = {
+        {key = "c", id = "com.openai.codex"},
+    },
+    actions = {
+        {id = "openDevOps", key = "o", label = "打开 DevOps", type = "url", url = "https://example.com"},
+    },
+}
+```
+
+配置文件只保存数据，不调用 Hammerspoon API。`function` 动作通过 `name` 引用 `init.lua` 中已有的动作处理器；新增通用行为时，应先在 `init.lua` 增加处理器，再在配置中声明动作。
+
+支持外部私有配置路径 `~/.config/hammerspoon/private/config.lua`；该文件存在时优先于 `~/.hammerspoon/private/config.lua`。
+
+## 目录结构
+
+```text
+init.lua                  运行时入口和行为实现
+private/config.lua        个人化声明式配置
+Spoons/ModalMgr.spoon     模态基础设施
+Spoons/WinWin.spoon       窗口管理
+Spoons/KSheet.spoon       应用快捷键面板
+Spoons/BrightnessControl.spoon 亮度控制
+```
