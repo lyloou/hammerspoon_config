@@ -1,0 +1,22 @@
+Spoons/BrightnessControl.spoon/.gitignore
+  h_76a3716dbfb2d7 1
+Spoons/BrightnessControl.spoon/Package.resolved
+  h_76a3716dbfb2d7 1-22
+Spoons/BrightnessControl.spoon/Package.swift
+  h_76a3716dbfb2d7 1-22
+Spoons/BrightnessControl.spoon/init.lua
+  h_76a3716dbfb2d7 9,26-63,67,73-75,79-96
+Spoons/BrightnessControl.spoon/set_brightness.swift
+  h_76a3716dbfb2d7 9-10,13-15,21,40-41,43-94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "cb0362adde350beec4dddcb4c41b754766309abc",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
