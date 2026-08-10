@@ -408,5 +408,7 @@ spoon.ModalMgr.supervisor:enter()
 -- 将 shift+option+z 绑定到插入当前时间的函数
 -- 获取当前时间并将其插入到当前应用程序的光标位置
 hs.hotkey.bind({"shift", "option"}, "z", function() hs.eventtap.keyStrokes(os.date("%Y-%m-%d %H:%M:%S")) end)
+hs.hotkey.bind({"shift", "option"}, "x", function() hs.eventtap.keyStrokes("执行计划和我确认") end)
+hs.hotkey.bind({"shift", "option"}, "c", function() hs.eventtap.keyStrokes("执行") end)
 
 hs.hotkey.bind({"shift", "option"}, "v", function() hs.execute("open -a /Applications/SimpleMind\\ Pro.app ~/w/desktop-media/A-工具箱/A-工具箱.smmx") end)

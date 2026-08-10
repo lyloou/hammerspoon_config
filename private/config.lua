@@ -12,7 +12,7 @@
 
 --指定要启用的模块
 hspoon_list = {
-    "BingDaily",
+    -- "BingDaily",
     "KSheet",
     -- "WinHints",
     -- "WinSwitcher",
@@ -36,8 +36,8 @@ hsapp_list = {
 
     {key = 'a', name = 'Notes'},
     {key = 'b', name = 'Typora'},
-    -- {key = 'c', id = 'com.openai.codex'},
-    {key = 'c', id = 'com.anthropic.claudefordesktop'},
+    {key = 'c', id = 'com.openai.codex'},
+    -- {key = 'c', id = 'com.anthropic.claudefordesktop'},
     -- {key = 'c', id = 'com.openai.atlas'},
     -- {key = 'c', id = 'com.google.Chrome'},
     {key = 'e', id = 'md.obsidian'},
@@ -55,8 +55,10 @@ hsapp_list = {
     {key = 'w', id = 'net.cozic.joplin-desktop'},
     -- {key = 'm', id = 'com.netease.163music'},
     -- {key = 'n', id = 'com.navicat.NavicatPremium'},
-    {key = 'n', id = 'com.dameng.sxypt'},
-    {key = 'x', id = 'com.anthropic.claudefordesktop'},
+    -- {key = 'n', id = 'com.dameng.sxypt'},
+    {key = 'n', id = 'com.dbx.app'},
+    -- {key = 'x', id = 'com.anthropic.claudefordesktop'},
+    {key = 'x', id = 'dev.warp.Warp-Stable'},
     {key = 'y', id = 'com.apple.systempreferences'},
     -- {key = 'z', id = 'com.github.wez.wezterm'}
     {key = 'z', id = 'com.mitchellh.ghostty'}
