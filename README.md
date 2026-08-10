@@ -26,6 +26,8 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 `Cmd+Shift+Ctrl+P` 切换 supervisor 中的全部快捷键；`Cmd+Shift+Ctrl+R` 重载配置。
 
+界面主题在 `private/config.lua` 的 `theme` 中配置，支持 `"dark"` 和 `"light"`，默认是 `"dark"`。
+
 ### 应用启动
 
 `Option+A` 进入应用启动模式。应用字母和对应程序在 `private/config.lua` 的 `apps` 中配置；`L` 打开 Launchpad，`D` 显示桌面。

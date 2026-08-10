@@ -20,6 +20,7 @@ end
 
 local config = loadConfig()
 local hotkeys = config.hotkeys or {}
+hammerspoon_theme = config.theme == "light" and "light" or "dark"
 local reloadNoticeKey = "hammerspoon.reloadNotice"
 local supervisorEnabled = false
 

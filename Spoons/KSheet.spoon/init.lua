@@ -67,30 +67,62 @@ local function generateHtml(application)
     local menuitems_tree = application:getMenuItems()
     local allmenuitems = processMenuItems(menuitems_tree)
 
+    local theme = hammerspoon_theme == "light" and "light" or "dark"
     local html = [[
         <!DOCTYPE html>
         <html>
         <head>
         <style type="text/css">
             *{margin:0; padding:0;}
+            :root{
+              color-scheme: dark;
+              --bg:#101419;
+              --surface:#171d24;
+              --line:#2a3540;
+              --text:#e8eef2;
+              --muted:#8d9ba6;
+              --accent:#67d8d1;
+            }
+            body.light{
+              color-scheme: light;
+              --bg:#f4f6f8;
+              --surface:#ffffff;
+              --line:#d8e0e6;
+              --text:#17212b;
+              --muted:#5d6b76;
+              --accent:#147a78;
+            }
             html, body{
-              background-color:#eee;
-              font-family: arial;
+              background-color:var(--bg);
+              color:var(--text);
+              font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
               font-size: 13px;
+            }
+            body{
+              border:1px solid var(--line);
+              border-radius:12px;
+              box-sizing:border-box;
+              overflow:hidden;
+              scrollbar-color:var(--line) var(--bg);
             }
             a{
               text-decoration:none;
-              color:#000;
+              color:var(--muted);
               font-size:12px;
             }
-            li.title{ text-align:center;}
+            li.title{
+              text-align:center;
+              color:var(--accent);
+              font-family:"Courier-Bold", monospace;
+              letter-spacing:0.04em;
+            }
             ul, li{list-style: inside none; padding: 0 0 5px;}
             footer{
               position: fixed;
               left: 0;
               right: 0;
               height: 48px;
-              background-color:#eee;
+              background-color:var(--surface);
             }
             header{
               position: fixed;
@@ -98,7 +130,7 @@ local function generateHtml(application)
               left: 0;
               right: 0;
               height:48px;
-              background-color:#eee;
+              background-color:var(--surface);
               z-index:99;
             }
             footer{ bottom: 0; }
@@ -106,11 +138,12 @@ local function generateHtml(application)
             footer hr {
               border: 0;
               height: 0;
-              border-top: 1px solid rgba(0, 0, 0, 0.1);
-              border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+              border-top: 1px solid var(--line);
+              border-bottom: 1px solid rgba(103, 216, 209, 0.12);
             }
             .title{
                 padding: 15px;
+                font-family:"Courier-Bold", monospace;
             }
             li.title{padding: 0  10px 15px}
             .content{
@@ -126,6 +159,7 @@ local function generateHtml(application)
             .content > .col{
               width: 23%;
               padding:20px 0 20px 20px;
+              border-left:1px solid var(--line);
             }
 
             li:after{
@@ -141,16 +175,19 @@ local function generateHtml(application)
               padding-right: 15px;
               text-align: right;
               float: left;
+              font-family:"Courier-Bold", monospace;
               font-weight: bold;
+              color:var(--accent);
             }
             .cmdtext{
               float: left;
               overflow: hidden;
               width: 165px;
+              color:var(--text);
             }
         </style>
         </head>
-          <body>
+          <body class="]] .. theme .. [[">
             <header>
               <div class="title"><strong>]] .. app_title .. [[</strong></div>
               <hr />

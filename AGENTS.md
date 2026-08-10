@@ -21,6 +21,7 @@
 
 `private/config.lua` 只返回声明式配置表，不调用 `hs.*` API、不注册快捷键、不定义运行时函数。配置表包括：
 
+- `theme`：界面主题，支持 `dark` 和 `light`，默认 `dark`
 - `spoons`：要加载的 Spoon 名称
 - `apps`：`appM` 中的应用启动项，格式为 `{key, name}` 或 `{key, id}`
 - `actions`：`quickActionM` 动作。支持 `text`、`execute`、`url`、`function`；`function` 通过 `name` 引用 `init.lua` 中的动作处理器

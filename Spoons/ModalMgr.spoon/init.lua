@@ -21,7 +21,7 @@ obj.active_list = {}
 obj.supervisor = nil
 
 function obj:init()
-    hsupervisor_keys = hsupervisor_keys or {{"cmd", "shift", "ctrl"}, "Q"}
+    hsupervisor_keys = hsupervisor_keys or {{"cmd", "shift", "ctrl"}, "P"}
     obj.supervisor = hs.hotkey.modal.new(hsupervisor_keys[1], hsupervisor_keys[2], 'Initialize Modal Environment')
     hshelp_keys = hshelp_keys or {{"alt", "shift"}, "/"}
     obj.supervisor:bind(hshelp_keys[1], hshelp_keys[2], "Toggle Help Panel", function() obj:toggleCheatsheet({all=obj.supervisor}) end)
@@ -34,11 +34,14 @@ function obj:init()
     }
     obj.which_key = hs.canvas.new({x = 0, y = 0, w = 0, h = 0})
     obj.which_key:level(hs.canvas.windowLevels.tornOffMenu)
+    obj.darkTheme = hammerspoon_theme ~= "light"
     obj.which_key[1] = {
         type = "rectangle",
         action = "fill",
-        fillColor = {hex = "#EEEEEE", alpha = 0.95},
-        roundedRectRadii = {xRadius = 10, yRadius = 10},
+        fillColor = {hex = obj.darkTheme and "#121820" or "#F4F6F8", alpha = 0.98},
+        strokeColor = {hex = obj.darkTheme and "#33414F" or "#CDD5DC", alpha = 1},
+        strokeWidth = 1,
+        roundedRectRadii = {xRadius = 12, yRadius = 12},
     }
 end
 
@@ -95,7 +98,7 @@ function obj:toggleCheatsheet(iterList, force)
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
                     textSize = 16,
-                    textColor = {hex = "#2390FF", alpha = 1},
+                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = 1},
                     textAlignment = "left",
                     frame = {
                         x = tostring(40 / (cres.w / 5 * 3)),
@@ -110,7 +113,7 @@ function obj:toggleCheatsheet(iterList, force)
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
                     textSize = 16,
-                    textColor = {hex = "#2390FF"},
+                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = 1},
                     textAlignment = "right",
                     frame = {
                         x = "50%",

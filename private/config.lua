@@ -1,4 +1,6 @@
 return {
+    theme = "dark",
+
     spoons = {
         "KSheet",
         "WinWin",
