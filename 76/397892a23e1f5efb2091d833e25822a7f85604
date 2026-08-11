@@ -1,0 +1,22 @@
+private/config.lua
+  h_76a3716dbfb2d7 4-6
+README.md
+  h_76a3716dbfb2d7 29,116
+Spoons/KSheet.spoon/init.lua
+  h_76a3716dbfb2d7 74,88,97,184
+Spoons/ModalMgr.spoon/init.lua
+  h_76a3716dbfb2d7 39,103,118
+init.lua
+  h_76a3716dbfb2d7 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "76397892a23e1f5efb2091d833e25822a7f85604",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
