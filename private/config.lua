@@ -1,6 +1,9 @@
 return {
     theme = "dark",
     opacity = 0.85,
+    -- fontColor = "#67D8D1",
+    -- fontColor = "#5AA9FF",
+    fontColor = "#FF79C6",
 
     spoons = {
         "KSheet",

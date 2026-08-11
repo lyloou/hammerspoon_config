@@ -26,7 +26,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 `Cmd+Shift+Ctrl+P` 切换 supervisor 中的全部快捷键；`Cmd+Shift+Ctrl+R` 重载配置。
 
-界面主题和透明度在 `private/config.lua` 中配置：`theme` 支持 `"dark"` 和 `"light"`，默认是 `"dark"`；`opacity` 范围为 `0` 到 `1`，默认是 `0.75`。
+界面主题、透明度和字体主色在 `private/config.lua` 中配置：`theme` 支持 `"dark"` 和 `"light"`，默认是 `"dark"`；`opacity` 范围为 `0` 到 `1`，默认是 `0.75`；`fontColor` 使用 `#RRGGBB` 格式，默认青色 `"#67D8D1"`，例如粉色 `"#FF79C6"` 或蓝色 `"#5AA9FF"`。
 
 ### 应用启动
 
@@ -113,6 +113,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 ```lua
 return {
+    fontColor = "#FF79C6",
     spoons = {"KSheet", "WinWin", "BrightnessControl"},
     apps = {
         {key = "c", id = "com.openai.codex"},

@@ -23,6 +23,7 @@ local hotkeys = config.hotkeys or {}
 hammerspoon_theme = config.theme == "light" and "light" or "dark"
 hammerspoon_opacity = tonumber(config.opacity) or 0.75
 hammerspoon_opacity = math.min(math.max(hammerspoon_opacity, 0), 1)
+hammerspoon_font_color = type(config.fontColor) == "string" and config.fontColor:match("^#[%x][%x][%x][%x][%x][%x]$") and config.fontColor or "#67D8D1"
 local reloadNoticeKey = "hammerspoon.reloadNotice"
 local supervisorEnabled = false
 

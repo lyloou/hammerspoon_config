@@ -71,6 +71,7 @@ local function generateHtml(application)
     local allmenuitems = processMenuItems(menuitems_tree)
 
     local theme = hammerspoon_theme == "light" and "light" or "dark"
+    local fontColor = hammerspoon_font_color or "#67D8D1"
     local html = [[
         <!DOCTYPE html>
         <html>
@@ -84,7 +85,7 @@ local function generateHtml(application)
               --line:#33414f;
               --text:#e8eef2;
               --muted:#8d9ba6;
-              --accent:#67d8d1;
+              --accent:]] .. fontColor .. [[;
             }
             body.light{
               color-scheme: light;
@@ -93,7 +94,7 @@ local function generateHtml(application)
               --line:#cdd5dc;
               --text:#17212b;
               --muted:#5d6b76;
-              --accent:#147a78;
+              --accent:]] .. fontColor .. [[;
             }
             html, body{
               background-color:var(--bg);
@@ -180,7 +181,7 @@ end
 local function loadingHtml(application)
     local theme = hammerspoon_theme == "light" and "light" or "dark"
     local background = theme == "light" and "#F4F6F8" or "#121820"
-    local text = theme == "light" and "#147A78" or "#67D8D1"
+    local text = hammerspoon_font_color or "#67D8D1"
     return string.format([[<html><body class="%s" style="background:%s;color:%s;font-family:-apple-system,sans-serif;padding:32px">读取 %s 菜单...</body></html>]], theme, background, text, application:title())
 end
 

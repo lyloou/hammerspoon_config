@@ -36,6 +36,7 @@ function obj:init()
     obj.which_key:level(hs.canvas.windowLevels.tornOffMenu)
     obj.darkTheme = hammerspoon_theme ~= "light"
     obj.opacity = hammerspoon_opacity or 0.75
+    obj.fontColor = hammerspoon_font_color or "#67D8D1"
     obj.which_key[1] = {
         type = "rectangle",
         action = "fill",
@@ -99,7 +100,7 @@ function obj:toggleCheatsheet(iterList, force)
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
                     textSize = 16,
-                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = obj.opacity},
+                    textColor = {hex = obj.fontColor, alpha = obj.opacity},
                     textAlignment = "left",
                     frame = {
                         x = tostring(40 / (cres.w / 5 * 3)),
@@ -114,7 +115,7 @@ function obj:toggleCheatsheet(iterList, force)
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
                     textSize = 16,
-                    textColor = {hex = obj.darkTheme and "#67D8D1" or "#147A78", alpha = obj.opacity},
+                    textColor = {hex = obj.fontColor, alpha = obj.opacity},
                     textAlignment = "right",
                     frame = {
                         x = "50%",
