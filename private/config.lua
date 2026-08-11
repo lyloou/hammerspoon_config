@@ -1,6 +1,6 @@
 return {
     theme = "dark",
-    opacity = 0.75,
+    opacity = 0.85,
 
     spoons = {
         "KSheet",
