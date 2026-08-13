@@ -37,6 +37,7 @@ function obj:init()
     obj.darkTheme = hammerspoon_theme ~= "light"
     obj.opacity = hammerspoon_opacity or 0.75
     obj.fontColor = hammerspoon_font_color or "#67D8D1"
+    obj.contentStartIndex = 2
     obj.which_key[1] = {
         type = "rectangle",
         action = "fill",
@@ -45,6 +46,22 @@ function obj:init()
         strokeWidth = 1,
         roundedRectRadii = {xRadius = 12, yRadius = 12},
     }
+    local backgroundImage = hammerspoon_background_image and hs.image.imageFromPath(hammerspoon_background_image)
+    if backgroundImage then
+        obj.which_key[2] = {
+            type = "rectangle",
+            action = "clip",
+            roundedRectRadii = {xRadius = 12, yRadius = 12},
+        }
+        obj.which_key[3] = {
+            type = "image",
+            image = backgroundImage,
+            imageAlpha = obj.opacity,
+            imageScaling = "scaleProportionally",
+        }
+        obj.which_key[4] = {type = "resetClip"}
+        obj.contentStartIndex = 5
+    end
 end
 
 ---ModalMgr：new（id）
@@ -95,7 +112,7 @@ function obj:toggleCheatsheet(iterList, force)
         end
         for idx, val in ipairs(keys_pool) do
             if idx % 2 == 1 then
-                obj.which_key[idx + 1] = {
+                obj.which_key[obj.contentStartIndex + idx - 1] = {
                     type = "text",
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
@@ -110,7 +127,7 @@ function obj:toggleCheatsheet(iterList, force)
                     }
                 }
             else
-                obj.which_key[idx + 1] = {
+                obj.which_key[obj.contentStartIndex + idx - 1] = {
                     type = "text",
                     text = keys_pool[idx],
                     textFont = "Courier-Bold",
@@ -175,8 +192,8 @@ function obj:deactivate(idList)
         obj.active_list[val] = nil
     end
     obj.modal_tray:hide()
-    for i = 2, #obj.which_key do
-        obj.which_key:removeElement(2)
+    for i = obj.contentStartIndex, #obj.which_key do
+        obj.which_key:removeElement(obj.contentStartIndex)
     end
     obj.which_key:hide()
 end

@@ -28,6 +28,8 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 
 界面主题、透明度和字体主色在 `private/config.lua` 中配置：`theme` 支持 `"dark"` 和 `"light"`，默认是 `"dark"`；`opacity` 范围为 `0` 到 `1`，默认是 `0.75`；`fontColor` 使用 `#RRGGBB` 格式，默认青色 `"#67D8D1"`，例如粉色 `"#FF79C6"` 或蓝色 `"#5AA9FF"`。
 
+模态快捷键面板默认使用 `images/modal-background.png` 作为背景。通过 `backgroundImage` 可指定相对于 Hammerspoon 配置目录的图片或绝对路径；设为 `false` 可关闭背景图。
+
 ### 应用启动
 
 `Option+A` 进入应用启动模式。应用字母和对应程序在 `private/config.lua` 的 `apps` 中配置；`L` 打开 Launchpad，`D` 显示桌面。
@@ -114,6 +116,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 ```lua
 return {
     fontColor = "#FF79C6",
+    backgroundImage = "images/modal-background.png",
     spoons = {"KSheet", "WinWin", "BrightnessControl"},
     apps = {
         {key = "c", id = "com.openai.codex"},

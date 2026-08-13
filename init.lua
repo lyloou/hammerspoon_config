@@ -23,7 +23,13 @@ local hotkeys = config.hotkeys or {}
 hammerspoon_theme = config.theme == "light" and "light" or "dark"
 hammerspoon_opacity = tonumber(config.opacity) or 0.75
 hammerspoon_opacity = math.min(math.max(hammerspoon_opacity, 0), 1)
-hammerspoon_font_color = type(config.fontColor) == "string" and config.fontColor:match("^#[%x][%x][%x][%x][%x][%x]$") and config.fontColor or "#67D8D1"
+hammerspoon_font_color = type(config.fontColor) == "string" and config.fontColor:match("^#[%x][%x][%x][%x][%x][%x]$") and config.fontColor or "#FF79C6"
+local backgroundImage = config.backgroundImage == nil and "images/modal-background.png" or config.backgroundImage
+if type(backgroundImage) == "string" and backgroundImage ~= "" then
+    hammerspoon_background_image = backgroundImage:sub(1, 1) == "/" and backgroundImage or hs.configdir .. "/" .. backgroundImage
+else
+    hammerspoon_background_image = nil
+end
 local reloadNoticeKey = "hammerspoon.reloadNotice"
 local supervisorEnabled = false
 

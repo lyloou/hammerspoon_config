@@ -1,9 +1,19 @@
 return {
+    -- theme = "light",
     theme = "dark",
-    opacity = 0.85,
+    opacity = 0.70,
+    -- 默认粉色主题
+    -- fontColor = "#FF79C6",
+    -- backgroundImage = "images/modal-background.png",
+
+    -- 青色主题
     -- fontColor = "#67D8D1",
+    -- backgroundImage = "images/modal-background-cyan.png",
+    
+    -- 蓝色主题
     -- fontColor = "#5AA9FF",
-    fontColor = "#FF79C6",
+    -- backgroundImage = "images/modal-background-blue.png",
+    
 
     spoons = {
         "KSheet",
