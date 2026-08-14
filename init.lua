@@ -105,6 +105,13 @@ local actionHandlers = {
         spoon.ModalMgr:deactivateAll()
         spoon.ModalMgr:activate({"cheatsheetM"})
     end,
+    showWinWinCheatsheet = function()
+        if not spoon.WinWin or not spoon.ModalMgr.modal_list["resizeM"] then
+            return
+        end
+        spoon.ModalMgr:deactivateAll()
+        spoon.ModalMgr:activate({"resizeM"}, "#B22222", true)
+    end,
     openConsole = function()
         hs.toggleConsole()
     end,
@@ -198,8 +205,8 @@ actionModal:bind("", "Q", "退出", function() spoon.ModalMgr:deactivate({"quick
 for _, action in ipairs(config.actions or {}) do
     if action.key and action.type then
         actionModal:bind("", action.key, action.label or action.type, function()
-            executeAction(action)
             spoon.ModalMgr:deactivate({"quickActionM"})
+            executeAction(action)
         end)
     end
 end

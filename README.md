@@ -41,6 +41,7 @@ git clone https://github.com/lyloou/hammerspoon_config ~/.hammerspoon
 | 按键 | 动作 |
 |---|---|
 | `P` | 切换全部快捷键 |
+| `W` | 进入 WinWin 模式并显示键位面板 |
 | `Z` | 打开 Hammerspoon Console |
 | `L` | 锁定屏幕 |
 | `T` | 插入当前时间 |
