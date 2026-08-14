@@ -1,0 +1,28 @@
+private/config.lua
+  s_195e71e0723a11::t_bdff9e5fcb18e2 52
+init.lua
+  s_195e71e0723a11::t_bdff9e5fcb18e2 108-114,209
+README.md
+  s_195e71e0723a11::t_bdff9e5fcb18e2 44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "41eae87f266d4b0d1b207a439929f7254f3de907",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_195e71e0723a11": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fff5b-7aa8-7dd3-b914-1d8e213a73c6",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
