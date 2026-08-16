@@ -38,6 +38,7 @@ function obj:init()
     obj.opacity = hammerspoon_opacity or 0.75
     obj.fontColor = hammerspoon_font_color or "#67D8D1"
     obj.contentStartIndex = 2
+    obj.backgroundImageSize = nil
     obj.which_key[1] = {
         type = "rectangle",
         action = "fill",
@@ -48,6 +49,7 @@ function obj:init()
     }
     local backgroundImage = hammerspoon_background_image and hs.image.imageFromPath(hammerspoon_background_image)
     if backgroundImage then
+        obj.backgroundImageSize = backgroundImage:size()
         obj.which_key[2] = {
             type = "rectangle",
             action = "clip",
@@ -89,12 +91,25 @@ function obj:toggleCheatsheet(iterList, force)
     else
         local cscreen = hs.screen.mainScreen()
         local cres = cscreen:fullFrame()
+        local panelWidth = cres.w / 5 * 3
+        local panelHeight = cres.h / 5 * 3
         obj.which_key:frame({
             x = cres.x + cres.w / 5,
             y = cres.y + cres.h / 5,
-            w = cres.w / 5 * 3,
-            h = cres.h / 5 * 3
+            w = panelWidth,
+            h = panelHeight
         })
+        if obj.backgroundImageSize then
+            local imageRatio = obj.backgroundImageSize.w / obj.backgroundImageSize.h
+            local panelRatio = panelWidth / panelHeight
+            if imageRatio > panelRatio then
+                local imageWidth = panelHeight * imageRatio
+                obj.which_key[3].frame = {x = (panelWidth - imageWidth) / 2, y = 0, w = imageWidth, h = panelHeight}
+            else
+                local imageHeight = panelWidth / imageRatio
+                obj.which_key[3].frame = {x = 0, y = (panelHeight - imageHeight) / 2, w = panelWidth, h = imageHeight}
+            end
+        end
         local keys_pool = {}
         local tmplist = iterList or obj.active_list
         for i, v in pairs(tmplist) do
