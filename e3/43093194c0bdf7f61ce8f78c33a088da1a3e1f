@@ -1,0 +1,24 @@
+Spoons/ModalMgr.spoon/init.lua
+  s_309f88771479a2::t_d6b998c9009f27 41,52,94-95,99-100,102-112
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e343093194c0bdf7f61ce8f78c33a088da1a3e1f",
+  "prompts": {},
+  "humans": {
+    "h_76a3716dbfb2d7": {
+      "author": "lilou <lyloou@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_309f88771479a2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ff4c4-44ae-7231-85d1-a98c3ef1224d",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "lilou <lyloou@qq.com>"
+    }
+  }
+}
