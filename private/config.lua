@@ -22,7 +22,7 @@ return {
     },
 
     apps = {
-        {key = "1", name = "Cursor"},
+        {key = "1", id = "dev.zed.Zed"},
         {key = "2", id = "com.google.Chrome"},
         {key = "3", name = "IntelliJ IDEA"},
         {key = "4", id = "com.kingsoft.wpsoffice.mac"},
@@ -39,6 +39,7 @@ return {
         {key = "r", id = "com.apple.reminders"},
         {key = "s", id = "com.modelmakertools.simplemindmacpro"},
         {key = "t", id = "com.lyloou.texttool"},
+        {key = "u", id = "com.todesktop.230313mzl4w4u92"},
         {key = "v", id = "com.apple.ActivityMonitor"},
         {key = "w", id = "net.cozic.joplin-desktop"},
         {key = "x", id = "dev.warp.Warp-Stable"},
