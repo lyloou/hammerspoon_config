@@ -25,7 +25,7 @@ obj.spoonPath = scriptPath()
 
 function obj:init()
     self.binaryPath = self.spoonPath .. "/set_brightness"
-    self.level = math.floor(hs.brightness.get())
+    self.level = math.floor(hs.brightness.get() or self.defaultLevels.normal)
 end
 
 function obj:set(level)

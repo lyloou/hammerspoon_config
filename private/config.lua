@@ -9,11 +9,11 @@ return {
     -- 青色主题
     -- fontColor = "#67D8D1",
     -- backgroundImage = "images/modal-background-cyan.png",
-    
+
     -- 蓝色主题
     -- fontColor = "#5AA9FF",
     -- backgroundImage = "images/modal-background-blue.png",
-    
+
 
     spoons = {
         "KSheet",
@@ -41,8 +41,8 @@ return {
         {key = "t", id = "com.lyloou.texttool"},
         {key = "u", id = "com.todesktop.230313mzl4w4u92"},
         {key = "v", id = "com.apple.ActivityMonitor"},
-        {key = "w", id = "net.cozic.joplin-desktop"},
-        {key = "x", id = "dev.warp.Warp-Stable"},
+        {key = "w", id = "com.microsoft.rdc.macos"},
+        {key = "x", id = "com.todesktop.230313mzl4w4u92"},
         {key = "y", id = "com.apple.systempreferences"},
         {key = "z", id = "com.mitchellh.ghostty"},
     },
